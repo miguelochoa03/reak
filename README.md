@@ -1,4 +1,4 @@
-# Name of Game: FREAK WARE 2 MOBILE EDITION
+# Name of Game: REAK
 
 ## Group Members:
 - Miguel Melo Ochoa
@@ -8,7 +8,7 @@
 - Anka Engin
 
 ## Description:
-Sequel to Freakware 1.
+Can’t spell freakware without reak.
 
 ## General Goals For Each Person:
 - Miguel

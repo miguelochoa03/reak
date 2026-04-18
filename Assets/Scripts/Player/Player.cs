@@ -1,7 +1,6 @@
 using UnityEngine;
 using Unity.Netcode;
 using Unity.Cinemachine;
-using UnityEngine.InputSystem.XInput;
 
 public class Player : NetworkBehaviour
 {
@@ -9,9 +8,6 @@ public class Player : NetworkBehaviour
     Vector3 move;
     public CinemachineCamera playerCam;
     public Transform head;
-
-    float rotationSpeed = 100f;
-    float rotateInput = 0f;
 
     float h;
     float v;
@@ -21,14 +17,19 @@ public class Player : NetworkBehaviour
     float sens = 200f;
     float xRotation = 0f;
 
+    float movementSpeed = 5f;
+
     public override void OnNetworkSpawn()
     {
+        if (!IsOwner) return;
+
         var cam = Instantiate(playerCam);
 
         cam.Follow = head;
         cam.LookAt = head;
 
         rb = GetComponent<Rigidbody>();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // inputs
@@ -46,10 +47,12 @@ public class Player : NetworkBehaviour
         mouseX = Input.GetAxis("Mouse X") * sens * Time.deltaTime;
         mouseY = Input.GetAxis("Mouse Y") * sens * Time.deltaTime;
 
+        // vertical rotate
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
-        head.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        //head.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
+        // horizontal rotate
         transform.Rotate(Vector3.up * mouseX);
 
     }
@@ -73,14 +76,8 @@ public class Player : NetworkBehaviour
         // move based on direction
         Vector3 moveDir = camRight * h + camForward * v;
 
-        // rotation
-        if (rotateInput != 0f)
-        {
-            Quaternion delta = Quaternion.Euler(0f, rotateInput * rotationSpeed * Time.fixedDeltaTime, 0f);
-            rb.MoveRotation(rb.rotation * delta);
-        }
-
-        // movement
-        rb.linearVelocity = new Vector3(move.x, rb.linearVelocity.y, move.z);
+        // wasd movement
+        rb.linearVelocity = new Vector3(moveDir.x, rb.linearVelocity.y, moveDir.z) * movementSpeed;
+        //rb.linearVelocity = new Vector3(move.x, rb.linearVelocity.y, move.z);
     }
 }

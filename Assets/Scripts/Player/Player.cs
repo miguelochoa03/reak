@@ -1,10 +1,12 @@
 using UnityEngine;
 using Unity.Netcode;
+using Unity.Cinemachine;
 
 public class Player : NetworkBehaviour
 {
     Rigidbody rb;
     Vector3 move;
+    public CinemachineCamera playerCam;
 
     public override void OnNetworkSpawn()
     {

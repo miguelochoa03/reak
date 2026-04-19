@@ -12,11 +12,6 @@ public class Player : NetworkBehaviour
     float h;
     float v;
 
-    float mouseX;
-    float mouseY;
-    float sens = 200f;
-    float xRotation = 0f;
-
     float movementSpeed = 5f;
 
     public override void OnNetworkSpawn()
@@ -40,21 +35,20 @@ public class Player : NetworkBehaviour
         // wasd
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
-        float speed = 5f;
-        move = new Vector3(h, 0, v) * speed;
+        //float speed = 5f;
+        //move = new Vector3(h, 0, v) * speed;
 
-        // mouse
-        mouseX = Input.GetAxis("Mouse X") * sens * Time.deltaTime;
-        mouseY = Input.GetAxis("Mouse Y") * sens * Time.deltaTime;
+        Transform cam = Camera.main.transform;
 
-        // vertical rotate
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -80f, 80f);
-        //head.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        //
+        Vector3 bodyEuler = transform.eulerAngles;
+        bodyEuler.y = cam.eulerAngles.y;
+        transform.eulerAngles = bodyEuler;
 
-        // horizontal rotate
-        transform.Rotate(Vector3.up * mouseX);
-
+        //
+        Vector3 headEuler = head.localEulerAngles;
+        headEuler.x = cam.eulerAngles.x;
+        head.localEulerAngles = headEuler;
     }
 
     // movement
@@ -68,7 +62,7 @@ public class Player : NetworkBehaviour
         Vector3 camForward = cam.forward;
         camForward.y = 0;
         camForward.Normalize();
-
+        
         Vector3 camRight = cam.right;
         camRight.y = 0;
         camRight.Normalize();

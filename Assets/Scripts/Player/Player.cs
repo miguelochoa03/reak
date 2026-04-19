@@ -1,12 +1,14 @@
 using UnityEngine;
 using Unity.Netcode;
 using Unity.Cinemachine;
+using System.Collections;
 
 public class Player : NetworkBehaviour
 {
     Rigidbody rb;
     public CinemachineCamera playerCam;
     public Transform head;
+    public Transform LookPoint;
 
     float h;
     float v;
@@ -19,8 +21,8 @@ public class Player : NetworkBehaviour
 
         var cam = Instantiate(playerCam);
 
-        cam.Follow = head;
-        cam.LookAt = head;
+        cam.Follow = LookPoint;
+        cam.LookAt = LookPoint;
 
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
@@ -38,41 +40,28 @@ public class Player : NetworkBehaviour
         // camera transform
         Transform cam = Camera.main.transform;
 
-        //// rotate body
-        //Vector3 bodyEuler = transform.eulerAngles;
-        //bodyEuler.y = cam.eulerAngles.y;
-        //transform.eulerAngles = bodyEuler;
-
-        //// rotate head
-        //Vector3 headEuler = head.localEulerAngles;
-        //headEuler.x = cam.eulerAngles.x;
-        //head.localEulerAngles = headEuler;
-
-
-        // yaw values
-        float cameraYaw = cam.eulerAngles.y;
-        float bodyYaw = transform.eulerAngles.y;
+        // angle values
+        float cameraAngle = cam.eulerAngles.y;
+        float bodyAngle = transform.eulerAngles.y;
 
         // how far the head is turned relative to the body
-        float yawDiff = Mathf.DeltaAngle(bodyYaw, cameraYaw);
+        float angleDiff = Mathf.DeltaAngle(bodyAngle, cameraAngle);
 
-        // HEAD rotation (yaw + pitch)
+        // head rotation
         Vector3 headEuler = head.localEulerAngles;
-        headEuler.x = cam.eulerAngles.x;   // pitch
-        headEuler.y = yawDiff;             // yaw relative to body
+        headEuler.x = cam.eulerAngles.x;
+        headEuler.y = angleDiff;
         head.localEulerAngles = headEuler;
 
-        // BODY rotation rules
+        // rotate body cases
         float limit = 60f;
         bool isMoving = (Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f);
 
-        if (isMoving || Mathf.Abs(yawDiff) > limit)
+        if (isMoving || Mathf.Abs(angleDiff) > limit)
         {
-            float newYaw = Mathf.LerpAngle(bodyYaw, cameraYaw, Time.deltaTime * 5f);
-            transform.eulerAngles = new Vector3(0f, newYaw, 0f);
+            float newAngle = Mathf.LerpAngle(bodyAngle, cameraAngle, Time.deltaTime * 5f);
+            transform.eulerAngles = new Vector3(0f, newAngle, 0f);
         }
-
-
     }
 
     void FixedUpdate()

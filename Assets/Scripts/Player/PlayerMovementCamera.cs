@@ -3,7 +3,7 @@ using Unity.Netcode;
 using Unity.Cinemachine;
 using System.Collections;
 
-public class Player : NetworkBehaviour
+public class PlayerMovementCamera : NetworkBehaviour
 {
     Rigidbody rb;
     public CinemachineCamera playerCam;
@@ -36,7 +36,8 @@ public class Player : NetworkBehaviour
     IEnumerator TryToPreventFlingOnSpawn()
     {
         transform.position += new Vector3(Random.Range(-5f, 5f), Random.Range(0.5f, 3f), Random.Range(-5f, 5f));
-        yield return new WaitForSeconds(Random.Range(2f,6f));
+        //yield return new WaitForSeconds(Random.Range(2f,6f));
+        yield return new WaitForSeconds(0f);
         rb.isKinematic = false;
     }
 

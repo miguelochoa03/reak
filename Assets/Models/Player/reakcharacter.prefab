@@ -649,6 +649,8 @@ GameObject:
   - component: {fileID: 1902678674532618290}
   - component: {fileID: 207595081907066678}
   - component: {fileID: 4912606153584972249}
+  - component: {fileID: 6075118633235847724}
+  - component: {fileID: 3189790013017561796}
   m_Layer: 7
   m_Name: reakcharacter
   m_TagString: Player
@@ -811,6 +813,33 @@ CapsuleCollider:
   m_Height: 4.0605884
   m_Direction: 1
   m_Center: {x: 0, y: 2.017265, z: 0}
+--- !u!114 &6075118633235847724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4794736312069070826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc4463a8f7bb6742978a54546f3ccc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  LookPoint: {fileID: 858098753268084696}
+  rayDistance: 7
+--- !u!114 &3189790013017561796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4794736312069070826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d03cfbb88a3d95449a6d2b457a08822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6650967718512454412
 GameObject:
   m_ObjectHideFlags: 0

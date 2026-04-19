@@ -51,7 +51,27 @@ public class PlayerInteraction : NetworkBehaviour
         // move pick up object
         if (heldObject != null && Input.GetMouseButton(0))
         {
-            heldObject.transform.position = origin + direction * rayDistance;
+            // prevent wall clipping
+            if (Physics.Raycast(origin, direction, out RaycastHit holdhit, rayDistance))
+            {
+                // heldObject is hitting something else
+                if (holdhit.collider.gameObject != heldObject.gameObject)
+                {
+                    // stop at the wall
+                    //heldObject.transform.position = holdhit.point;
+
+                    // drop the object
+                    heldObject = null;
+                }
+                else
+                {
+                    heldObject.transform.position = origin + direction * rayDistance;
+                }
+            }
+            else
+            {
+                heldObject.transform.position = origin + direction * rayDistance;
+            }
         }
 
         // drop pick up object

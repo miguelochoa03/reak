@@ -29,6 +29,15 @@ public class Player : NetworkBehaviour
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
 
+
+        StartCoroutine(TryToPreventFlingOnSpawn());
+    }
+
+    IEnumerator TryToPreventFlingOnSpawn()
+    {
+        transform.position += new Vector3(Random.Range(-5f, 5f), Random.Range(0.5f, 3f), Random.Range(-5f, 5f));
+        yield return new WaitForSeconds(Random.Range(2f,6f));
+        rb.isKinematic = false;
     }
 
     void Update()
@@ -57,9 +66,16 @@ public class Player : NetworkBehaviour
         head.localEulerAngles = new Vector3 (headangle, 0f, 0f);
     }
 
-        void FixedUpdate()
+    void FixedUpdate()
     {
         if (!IsOwner) return;
+
+        // max velocity
+        Vector3 maxv = rb.linearVelocity;
+        maxv.x = Mathf.Clamp(maxv.x, -3f, 3f);
+        maxv.y = Mathf.Clamp(maxv.y, -3f, 7f);
+        maxv.z = Mathf.Clamp(maxv.z, -3f, 3f);
+        rb.linearVelocity = maxv;
 
         // camera transform
         Transform cam = Camera.main.transform;

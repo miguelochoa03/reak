@@ -648,7 +648,7 @@ GameObject:
   - component: {fileID: 5396093309169020802}
   - component: {fileID: 1902678674532618290}
   - component: {fileID: 207595081907066678}
-  - component: {fileID: 4721272809539567627}
+  - component: {fileID: 4912606153584972249}
   m_Layer: 7
   m_Name: reakcharacter
   m_TagString: Player
@@ -769,7 +769,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4794736312069070826}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.1
   m_Drag: 0
   m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -784,11 +784,11 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
---- !u!136 &4721272809539567627
+  m_CollisionDetection: 3
+--- !u!136 &4912606153584972249
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -808,9 +808,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 4.0745387
+  m_Height: 4.0605884
   m_Direction: 1
-  m_Center: {x: 0, y: 2.0257332, z: 0}
+  m_Center: {x: 0, y: 2.017265, z: 0}
 --- !u!1 &6650967718512454412
 GameObject:
   m_ObjectHideFlags: 0

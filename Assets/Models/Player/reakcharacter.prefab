@@ -199,11 +199,11 @@ Transform:
   m_GameObject: {fileID: 2615814716993981509}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.312215, z: 0.62}
+  m_LocalPosition: {x: 0.00021872856, y: 0, z: 0.65801096}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5314674072733042000}
+  m_Father: {fileID: 8146522352266934386}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3096251146936140865
 GameObject:
@@ -672,7 +672,6 @@ Transform:
   - {fileID: 8039302038917398781}
   - {fileID: 6086122817471837730}
   - {fileID: 8146522352266934386}
-  - {fileID: 858098753268084696}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3846436521747961042
@@ -785,7 +784,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
@@ -823,7 +822,6 @@ GameObject:
   - component: {fileID: 1353108216806451883}
   - component: {fileID: 5455960927386057899}
   - component: {fileID: 8695938198787619899}
-  - component: {fileID: 7180353425012988860}
   m_Layer: 7
   m_Name: TOPHEAD
   m_TagString: Untagged
@@ -899,33 +897,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &7180353425012988860
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6650967718512454412}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 14
-  m_CollisionDetection: 0
 --- !u!1 &7175517581776690379
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,6 +932,7 @@ Transform:
   - {fileID: 2866761175443116351}
   - {fileID: 3429903460140224207}
   - {fileID: 3223425659338203842}
+  - {fileID: 858098753268084696}
   m_Father: {fileID: 5314674072733042000}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1484164950322822934

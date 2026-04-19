@@ -15,6 +15,8 @@ public class Player : NetworkBehaviour
 
     float movementSpeed = 5f;
 
+    float headangle = 0f;
+
     public override void OnNetworkSpawn()
     {
         if (!IsOwner) return;
@@ -40,31 +42,22 @@ public class Player : NetworkBehaviour
         // camera transform
         Transform cam = Camera.main.transform;
 
-        // angle values
-        float cameraAngle = cam.eulerAngles.y;
-        float bodyAngle = transform.eulerAngles.y;
+        // rotates body horizontally
+        Vector3 bodyEuler = transform.eulerAngles;
+        bodyEuler.y = cam.eulerAngles.y;
+        transform.eulerAngles = bodyEuler;
 
-        // how far the head is turned relative to the body
-        float angleDiff = Mathf.DeltaAngle(bodyAngle, cameraAngle);
-
-        // head rotation
-        Vector3 headEuler = head.localEulerAngles;
-        headEuler.x = cam.eulerAngles.x;
-        headEuler.y = angleDiff;
-        head.localEulerAngles = headEuler;
-
-        // rotate body cases
-        float limit = 60f;
-        bool isMoving = (Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f);
-
-        if (isMoving || Mathf.Abs(angleDiff) > limit)
+        // rotates head vertically
+        headangle = cam.eulerAngles.x;
+        if (headangle > 180f)
         {
-            float newAngle = Mathf.LerpAngle(bodyAngle, cameraAngle, Time.deltaTime * 5f);
-            transform.eulerAngles = new Vector3(0f, newAngle, 0f);
+            headangle -= 360f;
         }
+        headangle = Mathf.Clamp(headangle, -40f, 40f);
+        head.localEulerAngles = new Vector3 (headangle, 0f, 0f);
     }
 
-    void FixedUpdate()
+        void FixedUpdate()
     {
         if (!IsOwner) return;
 

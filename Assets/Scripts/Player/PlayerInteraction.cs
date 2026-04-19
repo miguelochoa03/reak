@@ -6,15 +6,9 @@ using UnityEngine;
 public class PlayerInteraction : NetworkBehaviour
 {
     public Transform LookPoint;
+    Pickupable heldObject;
+
     public float rayDistance = 7f;
-
-    public override void OnNetworkSpawn()
-    {
-        if (!IsOwner) return;
-
-        // 
-
-    }
 
     void Update()
     {
@@ -27,17 +21,24 @@ public class PlayerInteraction : NetworkBehaviour
         Vector3 origin = LookPoint.position;
         Vector3 direction = cam.forward;
 
-        // check if ray cast hit anything
+        // check ray cast hit anything
         if (Physics.Raycast(origin, direction, out RaycastHit hit, rayDistance))
         {
             Debug.DrawRay(origin, direction * rayDistance, Color.red); // see visually in scene view (not game view)
 
+            // check if pickupable
             bool IsPickupAble = hit.collider.TryGetComponent<Pickupable>(out var pickup);
-
             if (IsPickupAble)
             {
                 Debug.Log("This can be picked up, name: " + hit.collider.name);
-            } else
+
+                // pick up object
+                if (Input.GetMouseButtonDown(0))
+                {
+                    heldObject = pickup;
+                }
+            }
+            else
             {
                 Debug.Log("NOT pickupable.");
             }
@@ -45,6 +46,18 @@ public class PlayerInteraction : NetworkBehaviour
         else
         {
             Debug.DrawRay(origin, direction * rayDistance, Color.yellow); // see visually in scene view (not game view)
+        }
+
+        // move pick up object
+        if (heldObject != null && Input.GetMouseButton(0))
+        {
+            heldObject.transform.position = origin + direction * rayDistance;
+        }
+
+        // drop pick up object
+        if (Input.GetMouseButtonUp(0))
+        {
+            heldObject = null;
         }
     }
 }

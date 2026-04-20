@@ -827,7 +827,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   LookPoint: {fileID: 858098753268084696}
-  rayDistance: 7
+  rayDistance: 4
 --- !u!114 &3189790013017561796
 MonoBehaviour:
   m_ObjectHideFlags: 0

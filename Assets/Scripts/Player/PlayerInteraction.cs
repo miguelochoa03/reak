@@ -8,7 +8,7 @@ public class PlayerInteraction : NetworkBehaviour
     public Transform LookPoint;
     Pickupable heldObject;
 
-    public float rayDistance = 7f;
+    float rayDistance = 4f;
 
     void Update()
     {
@@ -79,6 +79,16 @@ public class PlayerInteraction : NetworkBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             heldObject = null;
+        }
+
+        // throw pick up object
+        if (heldObject != null && Input.GetKeyDown(KeyCode.E))
+        {
+            Rigidbody rb = heldObject.GetComponent<Rigidbody>();
+            Vector3 throwDir = Camera.main.transform.forward;
+            float throwForce = 50f;
+            heldObject = null;
+            rb.AddForce(throwDir * throwForce, ForceMode.VelocityChange);
         }
     }
 }

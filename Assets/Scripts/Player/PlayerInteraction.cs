@@ -57,19 +57,20 @@ public class PlayerInteraction : NetworkBehaviour
                 // heldObject is hitting something else
                 if (holdhit.collider.gameObject != heldObject.gameObject)
                 {
-                    // stop at the wall
-                    //heldObject.transform.position = holdhit.point;
-
                     // drop the object
                     heldObject = null;
                 }
                 else
                 {
+                    // move the object to the end of the raycast
                     heldObject.transform.position = origin + direction * rayDistance;
+
+
                 }
             }
             else
             {
+                // move the object to the end of the raycast
                 heldObject.transform.position = origin + direction * rayDistance;
             }
         }

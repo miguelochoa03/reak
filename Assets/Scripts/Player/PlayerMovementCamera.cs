@@ -35,9 +35,9 @@ public class PlayerMovementCamera : NetworkBehaviour
 
     IEnumerator TryToPreventFlingOnSpawn()
     {
-        //transform.position += new Vector3(Random.Range(-5f, 5f), Random.Range(0.5f, 3f), Random.Range(-5f, 5f));
+        transform.position += new Vector3(Random.Range(-5f, 5f), Random.Range(0.5f, 3f), Random.Range(-5f, 5f));
         //yield return new WaitForSeconds(Random.Range(2f,6f));
-        yield return new WaitForSeconds(0f);
+        yield return new WaitForSeconds(1f);
         rb.isKinematic = false;
     }
 

@@ -28,7 +28,7 @@ value to continue to more difficult levels.
 - Anka
   - CODE (multiplayer lobby), CREATE MAP (map like peak for everything we make to play on)
 - Ryan
-  - 
+  - CODE (sky shaders, shaders, player if needed, audio and sound design)
 
 ## Foreseeing Assistance
 - For Miguel

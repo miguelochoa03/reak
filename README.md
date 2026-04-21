@@ -6,7 +6,7 @@
 - Francisco Gomez
 - Alex Hayet
 - Anka Engin
-- Ryan Alakija (?)
+- Ryan Alakija
 
 ## Description:
 *Can’t spell freakware without reak.*
@@ -27,6 +27,12 @@ value to continue to more difficult levels.
   - PLAYER ITEMS (etc.), MAP ITEMS (apples, bushes, tree, etc.)
 - Anka
   - CODE (multiplayer lobby), CREATE MAP (map like peak for everything we make to play on)
+- Ryan
+  - 
+
+## Foreseeing Assistance
+- For Miguel
+  - Multiplayer might be really hard, so I'll have a few questions for guidance, or we might switch to mobile, worst case.
 
 ## Example of Current Gameplay:
 (presenting within Unity in person)

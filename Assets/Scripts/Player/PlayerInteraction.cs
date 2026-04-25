@@ -36,6 +36,8 @@ public class PlayerInteraction : NetworkBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     heldObject = pickup;
+                    var heldObjectNetworkObject = heldObject.GetComponent<NetworkObject>();
+                    GetComponent<NetworkOwnershipChanger>().ChangeToClientServerRpc(heldObjectNetworkObject);
                 }
             }
             else

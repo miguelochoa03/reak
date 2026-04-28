@@ -1,7 +1,8 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Assertions;
 
-public class NetworkOwnershipChanger : NetworkBehaviour
+public class ServerRpcStuff : NetworkBehaviour
 {
     [ServerRpc]
     public void ChangeToClientServerRpc(NetworkObjectReference objRef, ServerRpcParams rpc = default)
@@ -14,5 +15,11 @@ public class NetworkOwnershipChanger : NetworkBehaviour
     {
         objRef.TryGet(out NetworkObject obj);
         obj.ChangeOwnership(0);
+    }
+    [ServerRpc]
+    public void ChangeToSpecificClientServerRpc(NetworkObjectReference objRef, ulong clientId)
+    {
+        objRef.TryGet(out NetworkObject obj);
+        obj.ChangeOwnership(clientId);
     }
 }

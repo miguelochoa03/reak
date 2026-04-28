@@ -718,6 +718,7 @@ MonoBehaviour:
   playerCam: {fileID: 1744259642778342695, guid: b4cc9391c6a9b1545bce0c9b4713f8dc, type: 3}
   head: {fileID: 8146522352266934386}
   LookPoint: {fileID: 858098753268084696}
+  cam: {fileID: 0}
 --- !u!114 &1902678674532618290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -828,6 +829,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   LookPoint: {fileID: 858098753268084696}
+  cam: {fileID: 0}
 --- !u!114 &3189790013017561796
 MonoBehaviour:
   m_ObjectHideFlags: 0

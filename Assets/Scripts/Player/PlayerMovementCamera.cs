@@ -17,11 +17,13 @@ public class PlayerMovementCamera : NetworkBehaviour
 
     float headangle = 0f;
 
+    public CinemachineCamera cam;
+
     public override void OnNetworkSpawn()
     {
         if (!IsOwner) return;
 
-        var cam = Instantiate(playerCam);
+        cam = Instantiate(playerCam);
 
         cam.Follow = LookPoint;
         cam.LookAt = LookPoint;
@@ -50,15 +52,16 @@ public class PlayerMovementCamera : NetworkBehaviour
         v = Input.GetAxis("Vertical");
 
         // camera transform
-        Transform cam = Camera.main.transform;
+        //Transform cam = Camera.main.transform;
+        Transform TransformCam = cam.transform;
 
         // rotates body horizontally
         Vector3 bodyEuler = transform.eulerAngles;
-        bodyEuler.y = cam.eulerAngles.y;
+        bodyEuler.y = TransformCam.eulerAngles.y;
         transform.eulerAngles = bodyEuler;
 
         // rotates head vertically
-        headangle = cam.eulerAngles.x;
+        headangle = TransformCam.eulerAngles.x;
         if (headangle > 180f)
         {
             headangle -= 360f;
@@ -103,15 +106,16 @@ public class PlayerMovementCamera : NetworkBehaviour
         rb.linearVelocity = controlledVelocity;
 
         // camera transform
-        Transform cam = Camera.main.transform;
+        //Transform cam = Camera.main.transform;
+        Transform TransformCam = cam.transform;
 
         // ignore vertical vector relative to camera (forward and backward movement)
-        Vector3 camForward = cam.forward;
+        Vector3 camForward = TransformCam.forward;
         camForward.y = 0;
         camForward.Normalize();
 
         // ignore vertical vector relative to camera (right and left movement)
-        Vector3 camRight = cam.right;
+        Vector3 camRight = TransformCam.right;
         camRight.y = 0;
         camRight.Normalize();
 

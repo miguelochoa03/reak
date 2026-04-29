@@ -8,7 +8,10 @@ using static UnityEngine.UI.Image;
 public class PlayerInteraction : NetworkBehaviour
 {
     public Transform LookPoint;
+
     Pickupable heldObject;
+
+    Rigidbody heldobjectrb;
 
     float rayDistance = 3f;
     bool ray;
@@ -39,6 +42,8 @@ public class PlayerInteraction : NetworkBehaviour
         ray = Physics.Raycast(origin, direction, out RaycastHit hit, rayDistance);
         Debug.DrawRay(origin, direction * rayDistance, Color.red); // see visually in scene view (not game view)
 
+        Debug.Log(heldObject);
+
         // check ray cast hit anything
         if (ray)
         {
@@ -58,18 +63,44 @@ public class PlayerInteraction : NetworkBehaviour
                     GetComponent<ServerRpcStuff>().ChangeToClientServerRpc(heldObjectNetworkObject);
 
                     // avoid stuttering while picked up
-                    heldObject.GetComponent<Rigidbody>().isKinematic = true;
+                    //heldObject.GetComponent<Rigidbody>().isKinematic = true;
                 }
             }
 
-            // move pick up object
-            if (heldObject != null && Input.GetMouseButton(0))
-            {
-                // move the object to the end of the raycast
-                heldObject.transform.position = origin + direction * rayDistance;
-            }
+            // throw pick up object
+            //if (heldObject != null && Input.GetKeyDown(KeyCode.E))
+            //{
+            //    NetworkOwnershipChanger netchanger = GetComponent<NetworkOwnershipChanger>();
+            //    var heldObjectNetworkObject = heldObject.GetComponent<NetworkObject>();
+            //    bool isPlayer = heldObject.GetComponent<PlayerMovementCamera>() != null;
 
-            // move pick up object
+            //    //heldObject.GetComponent<Pickupable>().isBeingHeld = false;
+            //    netchanger.SetIsBeingHeldServerRpc(heldObjectNetworkObject, false);
+
+            //    Rigidbody rb = heldObject.GetComponent<Rigidbody>();
+            //    rb.isKinematic = false;
+
+            //    Vector3 throwDir = TransformCam.forward;
+            //    float throwForce = 50f;
+            //    rb.AddForce(throwDir * throwForce, ForceMode.VelocityChange);
+
+            //    if (isPlayer)
+            //    {
+            //        // give player control back
+            //        netchanger.ChangeToSpecificClientServerRpc(heldObjectNetworkObject, originalOwner);
+            //    }
+            //    else
+            //    {
+            //        netchanger.ChangeToServerServerRpc(heldObjectNetworkObject);
+            //    }
+
+            //    heldObject = null;
+
+
+
+
+
+            // prevent wall clipping
             //    if (heldObject != null && Input.GetMouseButton(0))
             //    {
             //        // prevent wall clipping
@@ -119,58 +150,34 @@ public class PlayerInteraction : NetworkBehaviour
             //    }
             //}
 
-            // drop pick up object
-            //if (Input.GetMouseButtonUp(0) && heldObject != null)
-            //{
-            //    NetworkOwnershipChanger netchanger = GetComponent<NetworkOwnershipChanger>();
-            //    var heldObjectNetworkObject = heldObject.GetComponent<NetworkObject>();
-            //    bool isPlayer = heldObject.GetComponent<PlayerMovementCamera>() != null;
+        }
 
-            //    //heldObject.GetComponent<Pickupable>().isBeingHeld = false;
-            //    netchanger.SetIsBeingHeldServerRpc(heldObjectNetworkObject, false);
-            //    heldObject.GetComponent<Rigidbody>().isKinematic = false;
+        // move pick up object
+        if (Input.GetMouseButton(0) && heldObject != null)
+        {
+            // move the object to the end of the raycast
 
-            //    if (isPlayer)
-            //    {
-            //        // give player control back
-            //        netchanger.ChangeToSpecificClientServerRpc(heldObjectNetworkObject, originalOwner);
-            //    }
-            //    else
-            //    {
-            //        netchanger.ChangeToServerServerRpc(heldObjectNetworkObject);
-            //    }
+            heldobjectrb = heldObject.GetComponent<Rigidbody>();
+            heldobjectrb.linearDamping = 16f;
+            heldobjectrb.angularDamping = 1f;
 
-            //    heldObject = null;
-            //}
+            Vector3 toTarget = targetPos - heldObject.transform.position;
 
-            // throw pick up object
-            //if (heldObject != null && Input.GetKeyDown(KeyCode.E))
-            //{
-            //    NetworkOwnershipChanger netchanger = GetComponent<NetworkOwnershipChanger>();
-            //    var heldObjectNetworkObject = heldObject.GetComponent<NetworkObject>();
-            //    bool isPlayer = heldObject.GetComponent<PlayerMovementCamera>() != null;
+            heldobjectrb.AddForce(toTarget * 0.05f);
+        }
 
-            //    //heldObject.GetComponent<Pickupable>().isBeingHeld = false;
-            //    netchanger.SetIsBeingHeldServerRpc(heldObjectNetworkObject, false);
+        // drop pick up object
+        if (Input.GetMouseButtonUp(0) && heldObject != null)
+        {
+            heldobjectrb = heldObject.GetComponent<Rigidbody>();
+            heldobjectrb.linearDamping = 0.2f;
+            heldobjectrb.angularDamping = 0.4f;
 
-            //    Rigidbody rb = heldObject.GetComponent<Rigidbody>();
-            //    rb.isKinematic = false;
+            // change ownership back to server
+            var heldObjectNetworkObject = heldObject.GetComponent<NetworkObject>();
+            GetComponent<ServerRpcStuff>().ChangeToServerServerRpc(heldObjectNetworkObject);
 
-            //    Vector3 throwDir = TransformCam.forward;
-            //    float throwForce = 50f;
-            //    rb.AddForce(throwDir * throwForce, ForceMode.VelocityChange);
-
-            //    if (isPlayer)
-            //    {
-            //        // give player control back
-            //        netchanger.ChangeToSpecificClientServerRpc(heldObjectNetworkObject, originalOwner);
-            //    }
-            //    else
-            //    {
-            //        netchanger.ChangeToServerServerRpc(heldObjectNetworkObject);
-            //    }
-
-            //    heldObject = null;
+            heldObject = null;
         }
     }
 }

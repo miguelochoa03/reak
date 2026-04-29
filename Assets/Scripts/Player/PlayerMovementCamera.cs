@@ -5,42 +5,44 @@ using System.Collections;
 
 public class PlayerMovementCamera : NetworkBehaviour
 {
-    Rigidbody rb;
-    public CinemachineCamera playerCam;
     public Transform head;
     public Transform LookPoint;
 
-    float h;
-    float v;
-
+    Rigidbody rb;
     float movementSpeed = 5f;
 
-    float headangle = 0f;
-
     public CinemachineCamera cam;
+    Transform transCam;
+
+    float h, v;
+
+    float headAngle = 0f;
+
+    IEnumerator TryToPreventFlingOnSpawn()
+    {
+        rb.isKinematic = true;
+        transform.position += new Vector3(Random.Range(-5f, 5f), Random.Range(0.5f, 3f), Random.Range(-5f, 5f));
+        yield return new WaitForSeconds(Random.Range(2f,6f));
+        //yield return new WaitForSeconds(1f);
+        rb.isKinematic = false;
+    }
 
     public override void OnNetworkSpawn()
     {
         if (!IsOwner) return;
 
-        cam = Instantiate(playerCam);
+        rb = GetComponent<Rigidbody>();
+
+        cam = Instantiate(cam);
 
         cam.Follow = LookPoint;
         cam.LookAt = LookPoint;
 
-        rb = GetComponent<Rigidbody>();
+        transCam = cam.transform;
+
         Cursor.lockState = CursorLockMode.Locked;
 
-
         StartCoroutine(TryToPreventFlingOnSpawn());
-    }
-
-    IEnumerator TryToPreventFlingOnSpawn()
-    {
-        transform.position += new Vector3(Random.Range(-5f, 5f), Random.Range(0.5f, 3f), Random.Range(-5f, 5f));
-        //yield return new WaitForSeconds(Random.Range(2f,6f));
-        yield return new WaitForSeconds(1f);
-        rb.isKinematic = false;
     }
 
     void Update()
@@ -51,23 +53,19 @@ public class PlayerMovementCamera : NetworkBehaviour
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
 
-        // camera transform
-        //Transform cam = Camera.main.transform;
-        Transform TransformCam = cam.transform;
-
         // rotates body horizontally
         Vector3 bodyEuler = transform.eulerAngles;
-        bodyEuler.y = TransformCam.eulerAngles.y;
+        bodyEuler.y = transCam.eulerAngles.y;
         transform.eulerAngles = bodyEuler;
 
         // rotates head vertically
-        headangle = TransformCam.eulerAngles.x;
-        if (headangle > 180f)
+        headAngle = transCam.eulerAngles.x;
+        if (headAngle > 180f)
         {
-            headangle -= 360f;
+            headAngle -= 360f;
         }
-        headangle = Mathf.Clamp(headangle, -40f, 40f);
-        head.localEulerAngles = new Vector3 (headangle, 0f, 0f);
+        headAngle = Mathf.Clamp(headAngle, -40f, 40f);
+        head.localEulerAngles = new Vector3(headAngle, 0f, 0f);
     }
 
     void FixedUpdate()
@@ -125,5 +123,4 @@ public class PlayerMovementCamera : NetworkBehaviour
         // wasd movement
         rb.linearVelocity = new Vector3(moveDir.x, rb.linearVelocity.y, moveDir.z) * movementSpeed;
     }
-
 }

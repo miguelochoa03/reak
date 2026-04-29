@@ -2,6 +2,7 @@ using UnityEngine;
 using Unity.Netcode;
 using Unity.Cinemachine;
 using System.Collections;
+using static UnityEngine.UI.Image;
 
 public class PlayerMovementCamera : NetworkBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerMovementCamera : NetworkBehaviour
 
     Rigidbody rb;
     float movementSpeed = 5f;
+    const float origMovementSpeed = 5f;
 
     public CinemachineCamera cam;
     Transform transCam;
@@ -18,12 +20,16 @@ public class PlayerMovementCamera : NetworkBehaviour
 
     float headAngle = 0f;
 
+    bool canJump = false;
+    bool isGrounded = false;
+    float jumpForce = 14f;
+
     IEnumerator TryToPreventFlingOnSpawn()
     {
         rb.isKinematic = true;
-        transform.position += new Vector3(Random.Range(-5f, 5f), Random.Range(0.5f, 3f), Random.Range(-5f, 5f));
-        yield return new WaitForSeconds(Random.Range(2f,6f));
-        //yield return new WaitForSeconds(1f);
+        //transform.position += new Vector3(Random.Range(-5f, 5f), Random.Range(0.5f, 3f), Random.Range(-5f, 5f));
+        //yield return new WaitForSeconds(Random.Range(2f,6f));
+        yield return new WaitForSeconds(1f);
         rb.isKinematic = false;
     }
 
@@ -66,54 +72,44 @@ public class PlayerMovementCamera : NetworkBehaviour
         }
         headAngle = Mathf.Clamp(headAngle, -40f, 40f);
         head.localEulerAngles = new Vector3(headAngle, 0f, 0f);
+
+        // sprint input
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            movementSpeed = 8f;
+        }
+        else
+        {
+            movementSpeed = origMovementSpeed;
+        }
+
+        // jump input
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            canJump = true;
+        }
     }
 
     void FixedUpdate()
     {
         if (!IsOwner) return;
 
-        // max velocity
-        //Vector3 maxv = rb.linearVelocity;
-        //maxv.x = Mathf.Clamp(maxv.x, -3f, 3f);
-        //maxv.y = Mathf.Clamp(maxv.y, -3f, 7f);
-        //maxv.z = Mathf.Clamp(maxv.z, -3f, 3f);
-        //rb.linearVelocity = maxv;
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.1f);
+        Debug.DrawRay(transform.position, Vector3.down * 0.1f, Color.red); // see visually in scene view (not game view)
 
-        // control velocity (prevent flings) //
-        Vector3 controlledVelocity = rb.linearVelocity;
-
-        // prevent flings but allows room for jump
-        if (controlledVelocity.y > 7f || controlledVelocity.x > 7f || controlledVelocity.z > 7f)
+        if (canJump)
         {
-            controlledVelocity.y = 0f;
-            controlledVelocity.x = 0f;
-            controlledVelocity.z = 0f;
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+            canJump = false;
         }
-
-        // max fall velocity
-        if (controlledVelocity.y < -3f)
-        {
-            controlledVelocity.y = -3f;
-        }
-
-        // max side velocity
-        controlledVelocity.x = Mathf.Clamp(controlledVelocity.x, -5f, 5f);
-        controlledVelocity.z = Mathf.Clamp(controlledVelocity.z, -5f, 5f);
-
-        // set that velocity //
-        rb.linearVelocity = controlledVelocity;
-
-        // camera transform
-        //Transform cam = Camera.main.transform;
-        Transform TransformCam = cam.transform;
 
         // ignore vertical vector relative to camera (forward and backward movement)
-        Vector3 camForward = TransformCam.forward;
+        Vector3 camForward = transCam.forward;
         camForward.y = 0;
         camForward.Normalize();
 
         // ignore vertical vector relative to camera (right and left movement)
-        Vector3 camRight = TransformCam.right;
+        Vector3 camRight = transCam.right;
         camRight.y = 0;
         camRight.Normalize();
 
@@ -121,6 +117,6 @@ public class PlayerMovementCamera : NetworkBehaviour
         Vector3 moveDir = camRight * h + camForward * v;
 
         // wasd movement
-        rb.linearVelocity = new Vector3(moveDir.x, rb.linearVelocity.y, moveDir.z) * movementSpeed;
+        rb.linearVelocity = new Vector3(moveDir.x * movementSpeed, rb.linearVelocity.y, moveDir.z * movementSpeed);
     }
 }

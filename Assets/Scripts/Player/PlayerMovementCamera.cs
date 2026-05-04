@@ -44,7 +44,9 @@ public class PlayerMovementCamera : NetworkBehaviour
         cam.Follow = LookPoint;
         cam.LookAt = LookPoint;
 
-        transCam = cam.transform;
+        //transCam = cam.transform;
+        transCam = Camera.main.transform;
+
 
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -65,13 +67,13 @@ public class PlayerMovementCamera : NetworkBehaviour
         transform.eulerAngles = bodyEuler;
 
         // rotates head vertically
-        headAngle = transCam.eulerAngles.x;
-        if (headAngle > 180f)
-        {
-            headAngle -= 360f;
-        }
-        headAngle = Mathf.Clamp(headAngle, -40f, 40f);
-        head.localEulerAngles = new Vector3(headAngle, 0f, 0f);
+        //headAngle = transCam.eulerAngles.x;
+        //if (headAngle > 180f)
+        //{
+        //    headAngle -= 360f;
+        //}
+        //headAngle = Mathf.Clamp(headAngle, -40f, 40f);
+        //head.localEulerAngles = new Vector3(headAngle, 0f, 0f);
 
         // sprint input
         if (Input.GetKey(KeyCode.LeftShift))

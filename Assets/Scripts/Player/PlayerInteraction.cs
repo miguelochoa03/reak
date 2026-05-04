@@ -8,6 +8,7 @@ using static UnityEngine.UI.Image;
 public class PlayerInteraction : NetworkBehaviour
 {
     public Transform LookPoint;
+    public Transform Target;
 
     Pickupable heldObject;
     Rigidbody heldobjectrb;
@@ -25,7 +26,9 @@ public class PlayerInteraction : NetworkBehaviour
         if (!IsOwner) return;
 
         cam = GetComponent<PlayerMovementCamera>().cam;
-        transCam = cam.transform;
+        //transCam = cam.transform;
+        transCam = Camera.main.transform;
+
     }
 
     void Update()
@@ -39,6 +42,7 @@ public class PlayerInteraction : NetworkBehaviour
 
         // make ray
         ray = Physics.Raycast(origin, direction, out RaycastHit hit, rayDistance);
+        if (Target != null) Target.position = targetPos;
         Debug.DrawRay(origin, direction * rayDistance, Color.red); // see visually in scene view (not game view)
 
         Debug.Log(heldObject);

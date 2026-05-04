@@ -6962,7 +6962,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5450029662112712263, guid: 421e9ae983ae41b4cbe5f33553776331, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6101274667468106697}
   m_SourcePrefab: {fileID: 100100000, guid: 421e9ae983ae41b4cbe5f33553776331, type: 3}
 --- !u!114 &542947743189463955 stripped
 MonoBehaviour:
@@ -6980,6 +6983,57 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1525771091565421570, guid: 421e9ae983ae41b4cbe5f33553776331, type: 3}
   m_PrefabInstance: {fileID: 3012365643353412897}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7092174962827055974 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5450029662112712263, guid: 421e9ae983ae41b4cbe5f33553776331, type: 3}
+  m_PrefabInstance: {fileID: 3012365643353412897}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6101274667468106697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7092174962827055974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b08cd40fa4929264cadb6ed87ba5127d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkTransformExpanded: 1
+  AutoOwnerAuthorityTickOffset: 1
+  PositionInterpolationType: 0
+  RotationInterpolationType: 0
+  ScaleInterpolationType: 0
+  PositionLerpSmoothing: 1
+  PositionMaxInterpolationTime: 0.1
+  RotationLerpSmoothing: 1
+  RotationMaxInterpolationTime: 0.1
+  ScaleLerpSmoothing: 1
+  ScaleMaxInterpolationTime: 0.1
+  AuthorityMode: 1
+  TickSyncChildren: 0
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 0
+  SyncRotAngleY: 0
+  SyncRotAngleZ: 0
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  SwitchTransformSpaceWhenParented: 0
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!4 &8199844601547116261 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6342653426856696772, guid: 421e9ae983ae41b4cbe5f33553776331, type: 3}

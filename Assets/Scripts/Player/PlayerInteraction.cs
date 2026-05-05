@@ -14,7 +14,8 @@ public class PlayerInteraction : NetworkBehaviour
     Rigidbody heldobjectrb;
 
     float rayDistance = 3f;
-    bool ray;
+    public RaycastHit hit;
+    public bool ray;
 
     public CinemachineCamera cam;
     Transform transCam;
@@ -26,7 +27,7 @@ public class PlayerInteraction : NetworkBehaviour
         if (!IsOwner) return;
 
         cam = GetComponent<PlayerMovementCamera>().cam;
-        //transCam = cam.transform;
+
         transCam = Camera.main.transform;
 
     }
@@ -41,7 +42,8 @@ public class PlayerInteraction : NetworkBehaviour
         Vector3 targetPos = origin + direction * rayDistance;
 
         // make ray
-        ray = Physics.Raycast(origin, direction, out RaycastHit hit, rayDistance);
+        //ray = Physics.Raycast(origin, direction, out RaycastHit hit, rayDistance);
+        ray = Physics.Raycast(origin, direction, out hit, rayDistance);
         if (Target != null) Target.position = targetPos;
         Debug.DrawRay(origin, direction * rayDistance, Color.red); // see visually in scene view (not game view)
 

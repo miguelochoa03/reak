@@ -59,7 +59,6 @@ public class PlayerMovementCamera : NetworkBehaviour
         cam.Follow = LookPoint;
         cam.LookAt = LookPoint;
 
-        //transCam = cam.transform;
         transCam = Camera.main.transform;
 
 

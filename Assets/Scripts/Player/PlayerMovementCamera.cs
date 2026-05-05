@@ -6,6 +6,8 @@ using static UnityEngine.UI.Image;
 
 public class PlayerMovementCamera : NetworkBehaviour
 {
+    PlayerAnimation anim;
+
     public Transform head;
     public Transform LookPoint;
 
@@ -18,12 +20,23 @@ public class PlayerMovementCamera : NetworkBehaviour
 
     float h, v;
 
-    float headAngle = 0f;
-
     bool canJump = false;
     bool isGrounded = false;
     float jumpForce = 14f;
 
+    void Animations()
+    {
+        bool isMoving = Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f;
+
+        if (isMoving)
+        {
+            anim.PlayJack();
+
+            return;
+        }
+
+        anim.PlayIdle();
+    }
     IEnumerator TryToPreventFlingOnSpawn()
     {
         rb.isKinematic = true;
@@ -38,6 +51,8 @@ public class PlayerMovementCamera : NetworkBehaviour
         if (!IsOwner) return;
 
         rb = GetComponent<Rigidbody>();
+
+        anim = GetComponent<PlayerAnimation>();
 
         cam = Instantiate(cam);
 
@@ -66,15 +81,6 @@ public class PlayerMovementCamera : NetworkBehaviour
         bodyEuler.y = transCam.eulerAngles.y;
         transform.eulerAngles = bodyEuler;
 
-        // rotates head vertically
-        //headAngle = transCam.eulerAngles.x;
-        //if (headAngle > 180f)
-        //{
-        //    headAngle -= 360f;
-        //}
-        //headAngle = Mathf.Clamp(headAngle, -40f, 40f);
-        //head.localEulerAngles = new Vector3(headAngle, 0f, 0f);
-
         // sprint input
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -90,6 +96,8 @@ public class PlayerMovementCamera : NetworkBehaviour
         {
             canJump = true;
         }
+
+        Animations();
     }
 
     void FixedUpdate()

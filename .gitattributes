@@ -1,0 +1,67 @@
+# Normalize line endings: store everything as LF in the repo.
+# Working-copy line endings are controlled by core.autocrlf locally.
+* text=auto eol=lf
+
+# Unity YAML — mark as text so git can use Unity's YAML smart merge.
+*.meta              text eol=lf merge=unityyamlmerge
+*.unity             text eol=lf merge=unityyamlmerge
+*.asset             text eol=lf merge=unityyamlmerge
+*.prefab            text eol=lf merge=unityyamlmerge
+*.mat               text eol=lf merge=unityyamlmerge
+*.anim              text eol=lf merge=unityyamlmerge
+*.controller        text eol=lf merge=unityyamlmerge
+*.overrideController text eol=lf merge=unityyamlmerge
+*.physicMaterial    text eol=lf merge=unityyamlmerge
+*.physicsMaterial2D text eol=lf merge=unityyamlmerge
+*.playable          text eol=lf merge=unityyamlmerge
+*.mask              text eol=lf merge=unityyamlmerge
+*.brush             text eol=lf merge=unityyamlmerge
+*.flare             text eol=lf merge=unityyamlmerge
+*.fontsettings      text eol=lf merge=unityyamlmerge
+*.guiskin           text eol=lf merge=unityyamlmerge
+*.giparams          text eol=lf merge=unityyamlmerge
+*.renderTexture     text eol=lf merge=unityyamlmerge
+*.spriteatlas       text eol=lf merge=unityyamlmerge
+*.terrainlayer      text eol=lf merge=unityyamlmerge
+*.mixer             text eol=lf merge=unityyamlmerge
+*.shadervariants    text eol=lf merge=unityyamlmerge
+*.preset            text eol=lf merge=unityyamlmerge
+*.asmdef            text eol=lf
+*.asmref            text eol=lf
+
+# Source code
+*.cs                text eol=lf diff=csharp
+*.shader            text eol=lf
+*.cginc             text eol=lf
+*.hlsl              text eol=lf
+*.compute           text eol=lf
+*.json              text eol=lf
+*.md                text eol=lf
+
+# Binary assets — never try to merge or diff
+*.png               binary
+*.jpg               binary
+*.jpeg              binary
+*.gif               binary
+*.psd               binary
+*.tga               binary
+*.tif               binary
+*.tiff              binary
+*.bmp               binary
+*.exr               binary
+*.hdr               binary
+*.fbx               binary
+*.obj               binary
+*.blend             binary
+*.dae               binary
+*.3ds               binary
+*.wav               binary
+*.mp3               binary
+*.ogg               binary
+*.aif               binary
+*.aiff              binary
+*.mp4               binary
+*.mov               binary
+*.dll               binary
+*.unitypackage      binary
+*.cubemap           binary

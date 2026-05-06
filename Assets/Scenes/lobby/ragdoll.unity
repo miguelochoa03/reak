@@ -319,7 +319,7 @@ MonoBehaviour:
   NetworkManagerExpanded: 0
   NetworkConfig:
     ProtocolVersion: 0
-    NetworkTransport: {fileID: 0}
+    NetworkTransport: {fileID: 361106537}
     PlayerPrefab: {fileID: 0}
     Prefabs:
       NetworkPrefabsLists:
@@ -576,7 +576,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 615821279}
-  - component: {fileID: 615821278}
+  - component: {fileID: 615821280}
   m_Layer: 0
   m_Name: LobbyManager
   m_TagString: Untagged
@@ -584,18 +584,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &615821278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 615821277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ccb01ece89f0d14ba7350ee8d48ac40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &615821279
 Transform:
   m_ObjectHideFlags: 0
@@ -611,6 +599,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &615821280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615821277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b55c90aea92d2440851b61e55387cc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &713850855
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,7 +811,7 @@ GameObject:
   - component: {fileID: 894588355}
   - component: {fileID: 894588354}
   - component: {fileID: 894588353}
-  - component: {fileID: 894588352}
+  - component: {fileID: 894588356}
   m_Layer: 0
   m_Name: LobbyPanel
   m_TagString: Untagged
@@ -843,24 +843,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 420}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &894588352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 894588350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c48cb4cb031bad4eb7a1248b11fc1da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerNameInput: {fileID: 2083788399}
-  lobbyNameInput: {fileID: 919402833}
-  createButton: {fileID: 1478388242}
-  joinButton: {fileID: 1729404624}
-  statusText: {fileID: 1899257030}
-  lobbyPanel: {fileID: 894588350}
 --- !u!114 &894588353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -925,6 +907,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 894588350}
   m_CullTransparentMesh: 1
+--- !u!114 &894588356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894588350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4526b3316a662643a40ff6de915e01d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNameInput: {fileID: 2083788399}
+  lobbyNameInput: {fileID: 919402833}
+  createButton: {fileID: 1478388242}
+  joinButton: {fileID: 1729404624}
+  statusText: {fileID: 1899257030}
+  lobbyPanel: {fileID: 894588350}
 --- !u!1 &919402830
 GameObject:
   m_ObjectHideFlags: 0

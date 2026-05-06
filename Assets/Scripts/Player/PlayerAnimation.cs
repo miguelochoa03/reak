@@ -11,12 +11,14 @@ public class PlayerAnimation : MonoBehaviour
     }
 
     public void PlayIdle() => Play("Idle");
+    public void PlayWalk() => Play("Walk");
+    public void PlayClimb() => Play("Climb");
     public void PlayJack() => Play("Jack");
 
     void Play(string state)
     {
         if (current == state) return;
         current = state;
-        anim.CrossFade(state, 0.2f);
+        anim.CrossFade(state, 0.5f);
     }
 }

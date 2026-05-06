@@ -10,8 +10,8 @@ public class PlayerInteraction : NetworkBehaviour
     public Transform LookPoint;
     public Transform Target;
 
-    Pickupable heldObject;
     Rigidbody heldobjectrb;
+    Pickupable heldObject;
 
     float rayDistance = 3f;
     public RaycastHit hit;

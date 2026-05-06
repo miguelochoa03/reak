@@ -30,7 +30,7 @@ public class PlayerMovementCamera : NetworkBehaviour
 
         if (isMoving)
         {
-            anim.PlayJack();
+            anim.PlayWalk();
 
             return;
         }

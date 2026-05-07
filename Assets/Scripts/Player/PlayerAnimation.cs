@@ -15,6 +15,7 @@ public class PlayerAnimation : MonoBehaviour
     public void PlayFall() => Play("Fall");
     public void PlayWalk() => Play("Walk");
     public void PlayClimb() => Play("Climb");
+    public void PlayTuck() => Play("Tuck");
     public void PlayJack() => Play("Jack");
 
     void Play(string state)

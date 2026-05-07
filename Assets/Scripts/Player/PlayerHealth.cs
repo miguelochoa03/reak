@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerHealth : NetworkBehaviour
 {
@@ -13,7 +14,8 @@ public class PlayerHealth : NetworkBehaviour
 
     Rigidbody rb;
 
-    HandleRagdoll ragdoll;
+    //HandleRagdoll ragdoll;
+    PlayerAnimation anim;
 
     bool didDie = false;
     public void TakeDamage(float dmg)
@@ -26,7 +28,8 @@ public class PlayerHealth : NetworkBehaviour
 
         rb = GetComponent<Rigidbody>();
 
-        ragdoll = transform.parent.GetComponent<HandleRagdoll>();
+        //ragdoll = transform.parent.GetComponent<HandleRagdoll>();
+        anim = GetComponent<PlayerAnimation>();
 
         body = transform.Find("body").GetComponent<Renderer>();
         tophead = transform.Find("head").Find("tophead").GetComponent<Renderer>();
@@ -44,8 +47,9 @@ public class PlayerHealth : NetworkBehaviour
             bottomhead.material = dieMaterial;
 
             // ragdoll
-
-            ragdoll.TurnOn();
+            GetComponent<PlayerMovementCamera>().enabled = false;
+            rb.isKinematic = true;
+            anim.PlayTuck();
 
             didDie = true;
         }

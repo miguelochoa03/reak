@@ -11,6 +11,8 @@ public class PlayerMovementCamera : NetworkBehaviour
     public Transform head;
     public Transform LookPoint;
 
+    public Vector3 spawnPosition = new Vector3(0f, 3f, 0f);
+
     Rigidbody rb;
     float movementSpeed = 5f;
     const float origMovementSpeed = 5f;
@@ -49,6 +51,8 @@ public class PlayerMovementCamera : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         if (!IsOwner) return;
+
+        transform.position = spawnPosition;
 
         rb = GetComponent<Rigidbody>();
 

@@ -7,9 +7,9 @@ public class PlayerHealth : NetworkBehaviour
 
     public Material dieMaterial;
 
-    GameObject body;
-    GameObject tophead;
-    GameObject bottomhead;
+    public Renderer body;
+    public Renderer tophead;
+    public Renderer bottomhead;
 
     Rigidbody rb;
 
@@ -24,9 +24,9 @@ public class PlayerHealth : NetworkBehaviour
 
         rb = GetComponent<Rigidbody>();
 
-        body = transform.Find("body").gameObject;
-        tophead = transform.Find("head").Find("tophead").gameObject;
-        bottomhead = transform.Find("head").Find("bottomhead").gameObject;
+        body = transform.Find("body").GetComponent<Renderer>();
+        tophead = transform.Find("head").Find("tophead").GetComponent<Renderer>();
+        bottomhead = transform.Find("head").Find("bottomhead").GetComponent<Renderer>();
     }
 
     private void Update()
@@ -35,9 +35,9 @@ public class PlayerHealth : NetworkBehaviour
 
         if (health <= 0)
         {
-            body.GetComponent<Renderer>().material = dieMaterial;
-            tophead.GetComponent<Renderer>().material = dieMaterial;
-            bottomhead.GetComponent<Renderer>().material = dieMaterial;
+            body.material = dieMaterial;
+            tophead.material = dieMaterial;
+            bottomhead.material = dieMaterial;
 
             // ragdoll
 

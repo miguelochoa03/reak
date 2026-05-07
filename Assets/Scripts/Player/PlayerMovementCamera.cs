@@ -60,15 +60,25 @@ public class PlayerMovementCamera : NetworkBehaviour
     {
         bool isMoving = Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f;
 
-        if (isMoving)
+        if (!isGrounded && rb.linearVelocity.y > 0.1f)
         {
-            anim.PlayWalk();
-
+            anim.PlayJump();
             return;
         }
 
-        //anim.PlayIdle();
-        anim.PlayNothing();
+        if (!isGrounded && rb.linearVelocity.y < -0.1f)
+        {
+            anim.PlayFall();
+            return;
+        }
+
+        if (isGrounded && isMoving)
+        {
+            anim.PlayWalk();
+            return;
+        }
+
+        anim.PlayIdle();
     }
     IEnumerator TryToPreventFlingOnSpawn()
     {

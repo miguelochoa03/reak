@@ -152,6 +152,17 @@ public class PlayerMovementCamera : NetworkBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    [Rpc(SendTo.Owner)]
+    public void TeleportToSpawnRpc()
+    {
+        transform.position = spawnPosition;
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+    }
+
     void TogglePerspective()
     {
         isThirdPerson = !isThirdPerson;

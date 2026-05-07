@@ -386,6 +386,20 @@ MonoBehaviour:
   head: {fileID: 6755110496725822834}
   LookPoint: {fileID: 3905619259572180251}
   spawnPosition: {x: 0, y: 3, z: 0}
+  walkSpeed: 9
+  sprintSpeed: 14
+  jumpForce: 22
+  maxFallSpeed: 80
+  gravityScale: 1.5
+  fallGravityMultiplier: 3
+  fov: 80
+  togglePerspectiveKey: 112
+  tpFrontView: 0
+  tpDistance: 3.5
+  tpHeight: 0.3
+  tpMouseSensitivity: 3
+  tpPitchMin: -30
+  tpPitchMax: 60
   cam: {fileID: 1744259642778342695, guid: b4cc9391c6a9b1545bce0c9b4713f8dc, type: 3}
 --- !u!114 &3809475756871753625
 MonoBehaviour:
@@ -6997,6 +7011,7 @@ GameObject:
   - component: {fileID: 8876249809708473512}
   - component: {fileID: 4239555852854823821}
   - component: {fileID: 848280767294998289}
+  - component: {fileID: -7714708884042144572}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -7106,6 +7121,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ragdoll: {fileID: 1857420762444663169}
   _animatedModel: {fileID: 194893472756900564}
+--- !u!114 &-7714708884042144572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4191046940428199937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b932a27548061fd4c896d90a42fe22c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  Score:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
+    m_InternalValue: 0
+  PlayerName:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
+    m_InternalValue:
+      utf8LengthInBytes: 6
+      bytes:
+        offset0000:
+          byte0000: 80
+          byte0001: 108
+          byte0002: 97
+          byte0003: 121
+          byte0004: 101
+          byte0005: 114
+          byte0006: 0
+          byte0007: 0
+          byte0008: 0
+          byte0009: 0
+          byte0010: 0
+          byte0011: 0
+          byte0012: 0
+          byte0013: 0
+          byte0014: 0
+          byte0015: 0
+        byte0016: 0
+        byte0017: 0
+        byte0018: 0
+        byte0019: 0
+        byte0020: 0
+        byte0021: 0
+        byte0022: 0
+        byte0023: 0
+        byte0024: 0
+        byte0025: 0
+        byte0026: 0
+        byte0027: 0
+        byte0028: 0
+        byte0029: 0
 --- !u!1 &4213972346419422723
 GameObject:
   m_ObjectHideFlags: 0

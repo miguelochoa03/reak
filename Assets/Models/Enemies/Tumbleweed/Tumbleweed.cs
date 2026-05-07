@@ -40,7 +40,7 @@ public class Tumbleweed : MonoBehaviour
                 break;
             case gameState.force:
                 Vector3 distance = new Vector3((targetPlayer.transform.position.x - transform.position.x), 0, (targetPlayer.transform.position.z - transform.position.z));
-                Vector3 localVelocity = Vector3.ClampMagnitude(distance, 1) * 4;
+                Vector3 localVelocity = Vector3.ClampMagnitude(distance, 1) * 8;
                 rigidBody.linearVelocity = transform.TransformDirection(localVelocity);
                 currentState = gameState.finished;
                 break;

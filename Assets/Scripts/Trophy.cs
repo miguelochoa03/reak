@@ -8,8 +8,8 @@ public class Trophy : NetworkBehaviour
     public Transform[] respawnPoints;
     public float respawnDelay = 1.5f;
 
-    [Tooltip("Optional one-shot sound played for everyone when grabbed.")]
-    public AudioSource collectSound;
+    [Tooltip("Name of the SoundEffectBunch on SoundEffectManager to play when collected (e.g. \"win\"). Leave empty for no sound.")]
+    public string collectSoundName = "win";
 
     bool collected;
     Renderer[] renderers;
@@ -23,13 +23,15 @@ public class Trophy : NetworkBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"[Trophy] OnTriggerEnter from {other.name} (IsServer={IsServer}, collected={collected})");
         if (!IsServer || collected) return;
 
         var no = other.GetComponentInParent<NetworkObject>();
-        if (no == null) return;
+        if (no == null) { Debug.Log("[Trophy] no NetworkObject on " + other.name); return; }
         var score = no.GetComponent<PlayerScore>();
-        if (score == null) return;
+        if (score == null) { Debug.Log("[Trophy] no PlayerScore on " + no.name); return; }
 
+        Debug.Log($"[Trophy] Awarding point to {no.OwnerClientId}");
         collected = true;
 
         // 1) Award point
@@ -39,8 +41,13 @@ public class Trophy : NetworkBehaviour
         foreach (var c in NetworkManager.Singleton.ConnectedClientsList)
         {
             if (c.PlayerObject == null) continue;
-            var pmc = c.PlayerObject.GetComponent<PlayerMovementCamera>();
-            if (pmc != null) pmc.TeleportToSpawnRpc();
+            var pmc = c.PlayerObject.GetComponentInChildren<PlayerMovementCamera>();
+            if (pmc == null)
+            {
+                Debug.LogWarning($"[Trophy] No PlayerMovementCamera under {c.PlayerObject.name}; cannot teleport client {c.ClientId}");
+                continue;
+            }
+            pmc.TeleportToSpawnRpc();
         }
 
         // 3) Play sound + hide trophy + relocate
@@ -67,7 +74,9 @@ public class Trophy : NetworkBehaviour
     [Rpc(SendTo.ClientsAndHost)]
     void PlayCollectSoundRpc()
     {
-        if (collectSound != null) collectSound.Play();
+        Debug.Log($"[Trophy] PlayCollectSoundRpc on {(NetworkManager.Singleton.IsHost ? "host" : "client")} — name='{collectSoundName}'");
+        if (!string.IsNullOrEmpty(collectSoundName))
+            SoundManager.play(collectSoundName);
     }
 
     [Rpc(SendTo.ClientsAndHost)]

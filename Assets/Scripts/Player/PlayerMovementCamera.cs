@@ -60,15 +60,25 @@ public class PlayerMovementCamera : NetworkBehaviour
     {
         bool isMoving = Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f;
 
-        if (isMoving)
+        if (!isGrounded && rb.linearVelocity.y > 0.1f)
         {
-            anim.PlayWalk();
-
+            anim.PlayJump();
             return;
         }
 
-        //anim.PlayIdle();
-        anim.PlayNothing();
+        if (!isGrounded && rb.linearVelocity.y < -0.1f)
+        {
+            anim.PlayFall();
+            return;
+        }
+
+        if (isGrounded && isMoving)
+        {
+            anim.PlayWalk();
+            return;
+        }
+
+        anim.PlayIdle();
     }
     IEnumerator TryToPreventFlingOnSpawn()
     {
@@ -155,8 +165,9 @@ public class PlayerMovementCamera : NetworkBehaviour
     [Rpc(SendTo.Owner)]
     public void TeleportToSpawnRpc()
     {
+        Debug.Log($"[Player] TeleportToSpawnRpc — moving from {transform.position} to {spawnPosition}");
         transform.position = spawnPosition;
-        if (rb != null)
+        if (rb != null && !rb.isKinematic)
         {
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;

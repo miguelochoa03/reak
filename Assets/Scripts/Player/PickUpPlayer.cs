@@ -10,6 +10,8 @@ public class PickUpPlayer : NetworkBehaviour
     bool interactionray;
     RaycastHit interactionhit;
 
+    PlayerAnimation anim;
+
     Rigidbody heldplayerrb;
     Pickupable heldPlayer;
 
@@ -20,6 +22,7 @@ public class PickUpPlayer : NetworkBehaviour
         if (!IsOwner) return;
 
         interaction = GetComponent<PlayerInteraction>();
+        anim = GetComponent<PlayerAnimation>();
         transCam = GetComponent<PlayerInteraction>().transCam;
 
     }
@@ -41,6 +44,8 @@ public class PickUpPlayer : NetworkBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     heldPlayer = pickup;
+
+
 
                     // change ownership to client messing with the poor player
                     var heldPlayerNetworkObject = heldPlayer.GetComponent<NetworkObject>();

@@ -6629,7 +6629,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2602535237204241771}
   - component: {fileID: 1035226337409048094}
-  - component: {fileID: 2571431076860111451}
   - component: {fileID: 6664810942245915202}
   m_Layer: 0
   m_Name: CharacterAvoidMergeConflict
@@ -6667,7 +6666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 617920027
+  GlobalObjectIdHash: 2216279951
   InScenePlacedSourceGlobalObjectIdHash: 2411622618
   DeferredDespawnTick: 0
   Ownership: 1
@@ -6680,52 +6679,6 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &2571431076860111451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4128641781767199257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b08cd40fa4929264cadb6ed87ba5127d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  NetworkTransformExpanded: 1
-  AutoOwnerAuthorityTickOffset: 1
-  PositionInterpolationType: 0
-  RotationInterpolationType: 0
-  ScaleInterpolationType: 0
-  PositionLerpSmoothing: 1
-  PositionMaxInterpolationTime: 0.1
-  RotationLerpSmoothing: 1
-  RotationMaxInterpolationTime: 0.1
-  ScaleLerpSmoothing: 1
-  ScaleMaxInterpolationTime: 0.1
-  AuthorityMode: 1
-  TickSyncChildren: 0
-  UseUnreliableDeltas: 0
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 1
-  SyncRotAngleX: 1
-  SyncRotAngleY: 1
-  SyncRotAngleZ: 1
-  SyncScaleX: 0
-  SyncScaleY: 0
-  SyncScaleZ: 0
-  PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
-  UseQuaternionSynchronization: 0
-  UseQuaternionCompression: 0
-  UseHalfFloatPrecision: 0
-  InLocalSpace: 0
-  SwitchTransformSpaceWhenParented: 0
-  Interpolate: 1
-  SlerpPosition: 0
 --- !u!114 &6664810942245915202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6738,6 +6691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7df1f3d6641405847bcd90a8c9e2f022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   _ragdoll: {fileID: 6643808675810316901}
   _animatedModel: {fileID: 7248450821882767237}
 --- !u!1 &4169516779723250153
@@ -10735,6 +10689,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6942288037733746210}
+  - component: {fileID: 6830604070922400376}
   m_Layer: 0
   m_Name: ragdollreakcharacterrigged
   m_TagString: Player
@@ -10810,6 +10765,52 @@ Transform:
   - {fileID: 6822488111798182777}
   m_Father: {fileID: 2602535237204241771}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6830604070922400376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6643808675810316901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b08cd40fa4929264cadb6ed87ba5127d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkTransformExpanded: 1
+  AutoOwnerAuthorityTickOffset: 1
+  PositionInterpolationType: 0
+  RotationInterpolationType: 0
+  ScaleInterpolationType: 0
+  PositionLerpSmoothing: 1
+  PositionMaxInterpolationTime: 0.1
+  RotationLerpSmoothing: 1
+  RotationMaxInterpolationTime: 0.1
+  ScaleLerpSmoothing: 1
+  ScaleMaxInterpolationTime: 0.1
+  AuthorityMode: 1
+  TickSyncChildren: 0
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  SwitchTransformSpaceWhenParented: 0
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!1 &6661365247338913422
 GameObject:
   m_ObjectHideFlags: 0
@@ -11689,6 +11690,7 @@ GameObject:
   - component: {fileID: 3466796890298928737}
   - component: {fileID: 1634490874441195966}
   - component: {fileID: 264742187644553935}
+  - component: {fileID: 8204515479864428272}
   m_Layer: 0
   m_Name: animatedreakcharacterrigged
   m_TagString: Player
@@ -11884,7 +11886,22 @@ MonoBehaviour:
   head: {fileID: 844297516424184464}
   LookPoint: {fileID: 2167335135733093630}
   spawnPosition: {x: 0, y: 3, z: 0}
+  walkSpeed: 9
+  sprintSpeed: 14
+  jumpForce: 22
+  maxFallSpeed: 80
+  gravityScale: 1.5
+  fallGravityMultiplier: 3
+  fov: 80
+  togglePerspectiveKey: 112
+  tpFrontView: 0
+  tpDistance: 3.5
+  tpHeight: 0.3
+  tpMouseSensitivity: 3
+  tpPitchMin: -30
+  tpPitchMax: 60
   cam: {fileID: 1744259642778342695, guid: b4cc9391c6a9b1545bce0c9b4713f8dc, type: 3}
+  isGrounded: 0
 --- !u!114 &4609841276821164898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11944,6 +11961,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &8204515479864428272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7248450821882767237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b08cd40fa4929264cadb6ed87ba5127d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkTransformExpanded: 1
+  AutoOwnerAuthorityTickOffset: 1
+  PositionInterpolationType: 0
+  RotationInterpolationType: 0
+  ScaleInterpolationType: 0
+  PositionLerpSmoothing: 1
+  PositionMaxInterpolationTime: 0.1
+  RotationLerpSmoothing: 1
+  RotationMaxInterpolationTime: 0.1
+  ScaleLerpSmoothing: 1
+  ScaleMaxInterpolationTime: 0.1
+  AuthorityMode: 1
+  TickSyncChildren: 0
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  SwitchTransformSpaceWhenParented: 0
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!1 &7261411947177094283
 GameObject:
   m_ObjectHideFlags: 0

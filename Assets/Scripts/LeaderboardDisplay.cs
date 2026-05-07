@@ -27,18 +27,38 @@ public class LeaderboardDisplay : MonoBehaviour
     void Refresh()
     {
         if (scoreText == null) return;
-        if (NetworkManager.Singleton == null || !NetworkManager.Singleton.IsListening)
+        if (NetworkManager.Singleton == null)
         {
-            scoreText.text = $"<b>{header}</b>\n(waiting for game)";
+            scoreText.text = $"<b>{header}</b>\n(no NetworkManager)";
+            return;
+        }
+        if (!NetworkManager.Singleton.IsListening)
+        {
+            scoreText.text = $"<b>{header}</b>\n(not listening)";
             return;
         }
 
         var entries = new List<(string name, int score)>();
-        foreach (var c in NetworkManager.Singleton.ConnectedClientsList)
+
+        // Server has access to all connected clients; remote clients only see themselves via ConnectedClientsList.
+        // Use SpawnManager.SpawnedObjectsList as a fallback so all clients can see all PlayerScores.
+        var seen = new HashSet<ulong>();
+        if (NetworkManager.Singleton.IsServer)
         {
-            if (c.PlayerObject == null) continue;
-            var ps = c.PlayerObject.GetComponent<PlayerScore>();
+            foreach (var c in NetworkManager.Singleton.ConnectedClientsList)
+            {
+                if (c.PlayerObject == null) continue;
+                var ps = c.PlayerObject.GetComponent<PlayerScore>();
+                if (ps == null) continue;
+                entries.Add((ps.PlayerName.Value.ToString(), ps.Score.Value));
+                seen.Add(c.ClientId);
+            }
+        }
+        foreach (var kv in NetworkManager.Singleton.SpawnManager.SpawnedObjectsList)
+        {
+            var ps = kv.GetComponent<PlayerScore>();
             if (ps == null) continue;
+            if (seen.Contains(kv.OwnerClientId)) continue;
             entries.Add((ps.PlayerName.Value.ToString(), ps.Score.Value));
         }
 

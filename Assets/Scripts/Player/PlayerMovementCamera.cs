@@ -54,7 +54,7 @@ public class PlayerMovementCamera : NetworkBehaviour
     float h, v;
 
     bool canJump = false;
-    bool isGrounded = false;
+    public bool isGrounded = false;
 
     void Animations()
     {

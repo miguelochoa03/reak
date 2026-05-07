@@ -88,6 +88,7 @@ public class PlayerClimb : NetworkBehaviour
             isClimbing = false;
 
             rb.useGravity = true;
+            rb.isKinematic = false;
             rb.linearVelocity = Vector3.zero;
 
             climbableObject = null;

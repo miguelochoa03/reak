@@ -165,8 +165,9 @@ public class PlayerMovementCamera : NetworkBehaviour
     [Rpc(SendTo.Owner)]
     public void TeleportToSpawnRpc()
     {
+        Debug.Log($"[Player] TeleportToSpawnRpc — moving from {transform.position} to {spawnPosition}");
         transform.position = spawnPosition;
-        if (rb != null)
+        if (rb != null && !rb.isKinematic)
         {
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;

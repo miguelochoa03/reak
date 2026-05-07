@@ -24,11 +24,13 @@ public class HandleRagdoll : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        if (!IsOwner) return;
-
+        // Visual setup must run on every client (owner and non-owners), not just the owner.
+        // Otherwise remote clients see the wrong visual state (or nothing at all).
         _ragdoll.gameObject.SetActive(false);
+        _animatedModel.gameObject.SetActive(true);
 
-        rb = transform.Find("animatedreakcharacterrigged").GetComponent<Rigidbody>();
+        var animated = transform.Find("animatedreakcharacterrigged");
+        if (animated != null) rb = animated.GetComponent<Rigidbody>();
     }
 
     //private void Awake()

@@ -3,15 +3,25 @@ using UnityEngine;
 
 public class GoldenApple : NetworkBehaviour
 {
-    [SerializeField] int healAmount = 50;
+    [SerializeField] float healAmount = 50f;
+
+    bool used = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!IsServer) return;
+        if (!IsServer || used) return;
 
-        if (other.TryGetComponent<PlayerHealth>(out var health)) //PlayerHealth is a placeholder script call for wherever health will be handled
+        if (other.TryGetComponent<PlayerHealth>(out var health))
         {
-            health.Heal(healAmount);
+            health.health += healAmount;
+
+            // Cap Health at 100
+            if (health.health > 100)
+            {
+                health.health = 100;
+            }
+
+            used = true;
 
             NetworkObject.Despawn();
         }

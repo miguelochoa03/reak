@@ -7,7 +7,7 @@ public class Grenade : NetworkBehaviour
     [SerializeField] float fuseTime = 3f;
     [SerializeField] float explosionRadius = 5f;
     [SerializeField] float explosionForce = 15f;
-    [SerializeField] int damage = 25;
+    [SerializeField] float damage = 25f;
 
     bool exploded = false;
 
@@ -35,10 +35,10 @@ public class Grenade : NetworkBehaviour
             // Damage
             if (hit.TryGetComponent<PlayerHealth>(out var health))
             {
-                health.Damage(damage);
+                health.TakeDamage(damage);
             }
 
-            // Push physics
+            // Push Physics
             if (hit.TryGetComponent<Rigidbody>(out var rb))
             {
                 rb.AddExplosionForce(

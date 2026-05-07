@@ -35,7 +35,8 @@ public class PlayerMovementCamera : NetworkBehaviour
             return;
         }
 
-        anim.PlayIdle();
+        //anim.PlayIdle();
+        anim.PlayNothing();
     }
     IEnumerator TryToPreventFlingOnSpawn()
     {

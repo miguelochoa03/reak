@@ -4407,7 +4407,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4841809084768586091}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 65e0971bda5e1be4e88dcd589516819b, type: 2}
   m_CullingMode: 0
@@ -4483,7 +4483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3500261417
+  GlobalObjectIdHash: 2580847416
   InScenePlacedSourceGlobalObjectIdHash: 4127279696
   DeferredDespawnTick: 0
   Ownership: 1
@@ -4541,6 +4541,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   head: {fileID: 8300581747111699203}
   LookPoint: {fileID: 3083009394829204919}
+  spawnPosition: {x: 0, y: 3, z: 0}
   cam: {fileID: 1744259642778342695, guid: b4cc9391c6a9b1545bce0c9b4713f8dc, type: 3}
 --- !u!114 &9111506251398162173
 MonoBehaviour:

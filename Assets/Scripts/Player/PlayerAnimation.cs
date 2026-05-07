@@ -20,6 +20,6 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (current == state) return;
         current = state;
-        anim.CrossFade(state, 0.5f);
+        anim.CrossFade(state, 0.1f);
     }
 }

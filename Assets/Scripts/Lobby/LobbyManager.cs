@@ -9,10 +9,15 @@ using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using Unity.Services.Relay;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour
 {
     public static LobbyManager Instance { get; private set; }
+
+    [Header("Scene Transition")]
+    [Tooltip("Scene to load on the host after creating the lobby. Clients auto-follow.")]
+    public string mapSceneName = "Map";
 
     const string JOIN_CODE_KEY = "JoinCode";
     const float HEARTBEAT_INTERVAL = 15f;
@@ -90,6 +95,10 @@ public class LobbyManager : MonoBehaviour
 
             NetworkManager.Singleton.StartHost();
             heartbeatRoutine = StartCoroutine(HeartbeatCoroutine(CurrentLobby.Id));
+
+            // Move host to the map scene; clients will follow automatically when they join.
+            if (!string.IsNullOrEmpty(mapSceneName))
+                NetworkManager.Singleton.SceneManager.LoadScene(mapSceneName, LoadSceneMode.Single);
 
             Debug.Log($"[Lobby] Created '{lobbyName}' — RelayCode={joinCode} LobbyId={CurrentLobby.Id}");
             return true;

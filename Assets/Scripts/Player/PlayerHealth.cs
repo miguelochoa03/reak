@@ -26,7 +26,7 @@ public class PlayerHealth : NetworkBehaviour
 
         rb = GetComponent<Rigidbody>();
 
-        ragdoll = GetComponent<HandleRagdoll>();
+        ragdoll = transform.parent.GetComponent<HandleRagdoll>();
 
         body = transform.Find("body").GetComponent<Renderer>();
         tophead = transform.Find("head").Find("tophead").GetComponent<Renderer>();

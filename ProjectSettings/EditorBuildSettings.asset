@@ -5,12 +5,21 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/Scenes/MiguelsTestScene/MiguelsTestScene.unity
     guid: 838ae70eb1567c145afdee3d2af48438
+  - enabled: 1
+    path: Assets/Scenes/lobby/ragdoll.unity
+    guid: 11f1209fd8ac08c4f8fee23fc98777a1
+  - enabled: 1
+    path: Assets/Scenes/FranciscoTestScene/FranciscoTestScene.unity
+    guid: d0121953cb02c484283e84f959d165d0
+  - enabled: 1
+    path: Assets/Scenes/map/map.unity
+    guid: 1b4cace084acdf94fb42d2bf889b08a7
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

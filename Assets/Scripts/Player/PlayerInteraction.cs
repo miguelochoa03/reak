@@ -10,17 +10,19 @@ public class PlayerInteraction : NetworkBehaviour
     public Transform LookPoint;
     public Transform Target;
 
-    Pickupable heldObject;
     Rigidbody heldobjectrb;
+    Pickupable heldObject;
 
     float rayDistance = 3f;
     public RaycastHit hit;
     public bool ray;
 
     public CinemachineCamera cam;
-    Transform transCam;
+    public Transform transCam;
 
     float throwForce = 15f;
+
+    public Vector3 targetPos;
 
     public override void OnNetworkSpawn()
     {
@@ -35,11 +37,13 @@ public class PlayerInteraction : NetworkBehaviour
     void Update()
     {
         if (!IsOwner) return;
+        if (transCam == null) transCam = Camera.main != null ? Camera.main.transform : null;
+        if (transCam == null) return;
 
         // start and end pos for raycast
         Vector3 origin = LookPoint.position;
         Vector3 direction = transCam.forward;
-        Vector3 targetPos = origin + direction * rayDistance;
+        targetPos = origin + direction * rayDistance;
 
         // make ray
         //ray = Physics.Raycast(origin, direction, out RaycastHit hit, rayDistance);
@@ -47,7 +51,7 @@ public class PlayerInteraction : NetworkBehaviour
         if (Target != null) Target.position = targetPos;
         Debug.DrawRay(origin, direction * rayDistance, Color.red); // see visually in scene view (not game view)
 
-        Debug.Log(heldObject);
+        // Debug.Log(heldObject);
 
         // check ray cast hit anything
         if (ray)

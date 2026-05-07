@@ -39,7 +39,7 @@ public class PlayerClimb : NetworkBehaviour
         interactionray = interaction.ray;
         interactionhit = interaction.hit;
 
-        Debug.Log("interactionhit point" + interactionhit.point);
+        // Debug.Log("interactionhit point" + interactionhit.point);
 
         if (interactionray)
         {

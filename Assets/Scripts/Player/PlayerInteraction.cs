@@ -47,7 +47,7 @@ public class PlayerInteraction : NetworkBehaviour
         if (Target != null) Target.position = targetPos;
         Debug.DrawRay(origin, direction * rayDistance, Color.red); // see visually in scene view (not game view)
 
-        Debug.Log(heldObject);
+        // Debug.Log(heldObject);
 
         // check ray cast hit anything
         if (ray)

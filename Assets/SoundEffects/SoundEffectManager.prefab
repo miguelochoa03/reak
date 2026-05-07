@@ -156,6 +156,11 @@ MonoBehaviour:
   - name: Jump
     audio:
     - {fileID: 8300000, guid: a8e070c2d1544554db208d6096e0af71, type: 3}
+  - name: Death
+    audio:
+    - {fileID: 8300000, guid: 0c9400f297569334aa37b5762a5c40d2, type: 3}
+    - {fileID: 8300000, guid: 690ddf9636e05bb4389026d8b5fdb9c2, type: 3}
+    - {fileID: 8300000, guid: e7c3914f967822c4aba1174c29d4c9bc, type: 3}
 --- !u!114 &5862318889311906339
 MonoBehaviour:
   m_ObjectHideFlags: 0

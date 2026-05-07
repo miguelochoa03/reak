@@ -13,6 +13,8 @@ public class PlayerHealth : NetworkBehaviour
 
     Rigidbody rb;
 
+    HandleRagdoll ragdoll;
+
     bool didDie = false;
     public void TakeDamage(float dmg)
     {
@@ -23,6 +25,8 @@ public class PlayerHealth : NetworkBehaviour
         if (!IsOwner) return;
 
         rb = GetComponent<Rigidbody>();
+
+        ragdoll = GetComponent<HandleRagdoll>();
 
         body = transform.Find("body").GetComponent<Renderer>();
         tophead = transform.Find("head").Find("tophead").GetComponent<Renderer>();
@@ -41,6 +45,7 @@ public class PlayerHealth : NetworkBehaviour
 
             // ragdoll
 
+            ragdoll.TurnOn();
 
             didDie = true;
         }

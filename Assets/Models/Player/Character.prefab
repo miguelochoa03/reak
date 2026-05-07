@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 3809475756871753625}
   - component: {fileID: 6841809285073905268}
   - component: {fileID: 4763227940910730270}
+  - component: {fileID: 7597389052722004675}
   m_Layer: 0
   m_Name: animatedreakcharacterrigged
   m_TagString: Player
@@ -354,6 +355,8 @@ MonoBehaviour:
   Target: {fileID: 451458931870686154}
   ray: 0
   cam: {fileID: 0}
+  transCam: {fileID: 0}
+  targetPos: {x: 0, y: 0, z: 0}
 --- !u!114 &7310813823026961205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,6 +433,19 @@ MonoBehaviour:
   body: {fileID: 0}
   tophead: {fileID: 0}
   bottomhead: {fileID: 0}
+--- !u!114 &7597389052722004675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194893472756900564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0532e0649ba7cd04898a1eec39093e25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1 &231713785666907264
 GameObject:
   m_ObjectHideFlags: 0
@@ -7017,7 +7033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3450276053
+  GlobalObjectIdHash: 2411622618
   InScenePlacedSourceGlobalObjectIdHash: 2582484971
   DeferredDespawnTick: 0
   Ownership: 1

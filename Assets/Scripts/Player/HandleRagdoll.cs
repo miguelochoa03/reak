@@ -9,6 +9,16 @@ public class HandleRagdoll : MonoBehaviour
 
     Rigidbody rb;
 
+    public void TurnOn()
+    {
+        _dead = true;
+    }
+
+    public void TurnOff()
+    {
+        _dead = false;
+    }
+
     private void Awake()
     {
         _ragdoll.gameObject.SetActive(false);
@@ -16,14 +26,15 @@ public class HandleRagdoll : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            ToggleDead();
-        }
+        //if (Input.GetButtonDown("Fire1"))
+        //{
+        //    ToggleDead();
+        //}
+        ToggleDead();
     }
     private void ToggleDead()
     {
-        _dead = !_dead;
+        //_dead = !_dead;
 
         if (_dead)
         {

@@ -20,8 +20,10 @@ public class PlayerMovementCamera : NetworkBehaviour
     public float jumpForce = 22f;
     [Tooltip("Cap on downward velocity. Lower = floatier, higher = faster falls.")]
     public float maxFallSpeed = 80f;
-    [Tooltip("Multiplier for downward gravity force. 1=normal, <1=floatier, >1=heavier.")]
-    [Range(0.2f, 4f)] public float gravityScale = 2.5f;
+    [Tooltip("Multiplier for gravity while ASCENDING. <1 = lighter (longer jump), >1 = heavier.")]
+    [Range(0.2f, 4f)] public float gravityScale = 1.5f;
+    [Tooltip("Extra multiplier applied while FALLING. Adds on top of gravityScale to make fall snappier than ascent.")]
+    [Range(1f, 6f)] public float fallGravityMultiplier = 3f;
 
     [Header("Camera")]
     [Tooltip("FOV applied to the FP Camera virtual camera at spawn.")]
@@ -238,9 +240,10 @@ public class PlayerMovementCamera : NetworkBehaviour
         // move based on direction
         Vector3 moveDir = camRight * h + camForward * v;
 
-        // Custom gravity scaling — multiplier on top of Unity's gravity.
-        // Negative means we add upward force to reduce effective gravity (gravityScale<1).
-        float extraG = (gravityScale - 1f) * Physics.gravity.y;
+        // Asymmetric gravity: lighter on ascent (snappy peak), heavier on descent (no float).
+        bool falling = rb.linearVelocity.y < 0f;
+        float effectiveScale = falling ? gravityScale * fallGravityMultiplier : gravityScale;
+        float extraG = (effectiveScale - 1f) * Physics.gravity.y;
         rb.AddForce(Vector3.up * extraG, ForceMode.Acceleration);
 
         // Cap fall speed so terminal velocity feels reasonable

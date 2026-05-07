@@ -659,7 +659,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 895488778}
-    PlayerPrefab: {fileID: 1585947480396074767, guid: e8a71059995e06a4fb682661f64b8e9f, type: 3}
+    PlayerPrefab: {fileID: 4191046940428199937, guid: 247b7477e2d26324889c3b5b8393ebfd, type: 3}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: 23017eacbf5ce41459ac2f543ba42e60, type: 2}
@@ -1240,6 +1240,7 @@ GameObject:
   - component: {fileID: 1623039318}
   - component: {fileID: 1623039317}
   - component: {fileID: 1623039316}
+  - component: {fileID: 1623039321}
   m_Layer: 0
   m_Name: climbsurface
   m_TagString: Climbable
@@ -1363,6 +1364,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1623039321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623039315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e77e772e9db7b840a4012c9c1d5db25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1847976897
 GameObject:
   m_ObjectHideFlags: 0

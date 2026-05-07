@@ -18,9 +18,11 @@ public class PlayerInteraction : NetworkBehaviour
     public bool ray;
 
     public CinemachineCamera cam;
-    Transform transCam;
+    public Transform transCam;
 
     float throwForce = 15f;
+
+    public Vector3 targetPos;
 
     public override void OnNetworkSpawn()
     {
@@ -41,7 +43,7 @@ public class PlayerInteraction : NetworkBehaviour
         // start and end pos for raycast
         Vector3 origin = LookPoint.position;
         Vector3 direction = transCam.forward;
-        Vector3 targetPos = origin + direction * rayDistance;
+        targetPos = origin + direction * rayDistance;
 
         // make ray
         //ray = Physics.Raycast(origin, direction, out RaycastHit hit, rayDistance);

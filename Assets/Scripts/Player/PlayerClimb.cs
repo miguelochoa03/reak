@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PlayerClimb : NetworkBehaviour
 {
@@ -38,6 +39,8 @@ public class PlayerClimb : NetworkBehaviour
         interactionray = interaction.ray;
         interactionhit = interaction.hit;
 
+        Debug.Log("interactionhit point" + interactionhit.point);
+
         if (interactionray)
         {
             // check if climbable object
@@ -50,6 +53,8 @@ public class PlayerClimb : NetworkBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     climbableObject = climb;
+
+                    isClimbing = true;
                 }
             }
         }
@@ -57,13 +62,35 @@ public class PlayerClimb : NetworkBehaviour
         // hold click to stay climbing
         if (Input.GetMouseButton(0) && climbableObject != null)
         {
+            if (!isClimbing) return;
+            
+            Debug.Log("is climbing");
+
+            isClimbing = true;
+
+            rb.useGravity = true;
+            rb.linearVelocity = Vector3.zero;
+
+
+            transform.position = interactionhit.point;
+
+            rb.isKinematic = true;
+
 
         }
 
+        
         // let go of click to stop climbing
         if (Input.GetMouseButtonUp(0) && climbableObject != null)
         {
+            Debug.Log("stopped climbing");
 
+            isClimbing = false;
+
+            rb.useGravity = true;
+            rb.linearVelocity = Vector3.zero;
+
+            climbableObject = null;
         }
     }
 }

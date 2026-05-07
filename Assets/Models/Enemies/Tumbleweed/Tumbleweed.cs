@@ -30,7 +30,7 @@ public class Tumbleweed : MonoBehaviour
                 {
                     for (int i = 0; i < playerList.Length; i++)
                     {
-                        if (Vector3.Distance(transform.position, playerList[i].transform.position) < 10.0f)
+                        if (Vector3.Distance(transform.position, playerList[i].transform.position) < 25.0f)
                         {
                             targetPlayer = playerList[i];
                             currentState = gameState.force;

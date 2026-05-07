@@ -35,6 +35,8 @@ public class PlayerInteraction : NetworkBehaviour
     void Update()
     {
         if (!IsOwner) return;
+        if (transCam == null) transCam = Camera.main != null ? Camera.main.transform : null;
+        if (transCam == null) return;
 
         // start and end pos for raycast
         Vector3 origin = LookPoint.position;

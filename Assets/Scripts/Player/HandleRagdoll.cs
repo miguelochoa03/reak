@@ -1,6 +1,7 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class HandleRagdoll : MonoBehaviour
+public class HandleRagdoll : NetworkBehaviour
 {
     [SerializeField] private GameObject _ragdoll;
     [SerializeField] private GameObject _animatedModel;
@@ -12,28 +13,44 @@ public class HandleRagdoll : MonoBehaviour
     public void TurnOn()
     {
         _dead = true;
+        ToggleDead();
     }
 
     public void TurnOff()
     {
         _dead = false;
-    }
-
-    private void Awake()
-    {
-        _ragdoll.gameObject.SetActive(false);
-        rb = transform.Find("animatedreakcharacterrigged").GetComponent<Rigidbody>();
-    }
-    private void Update()
-    {
-        //if (Input.GetButtonDown("Fire1"))
-        //{
-        //    ToggleDead();
-        //}
         ToggleDead();
     }
+
+    public override void OnNetworkSpawn()
+    {
+        if (!IsOwner) return;
+
+        _ragdoll.gameObject.SetActive(false);
+
+        rb = transform.Find("animatedreakcharacterrigged").GetComponent<Rigidbody>();
+    }
+
+    //private void Awake()
+    //{
+    //    _ragdoll.gameObject.SetActive(false);
+    //    rb = transform.Find("animatedreakcharacterrigged").GetComponent<Rigidbody>();
+    //}
+
+    // test
+    //private void Update()
+    //{
+    //    if (Input.GetButtonDown("Fire1"))
+    //    {
+    //        TurnOn();
+    //        //ToggleDead();
+    //    }
+    //    //ToggleDead();
+    //}
     private void ToggleDead()
     {
+        if (!IsOwner) return;
+
         //_dead = !_dead;
 
         if (_dead)
@@ -52,6 +69,8 @@ public class HandleRagdoll : MonoBehaviour
 
     private void CopyTransformData(Transform sourceTransform, Transform destinationTransform, Vector3 velocity)
     {
+        if (!IsOwner) return;
+
         if (sourceTransform.childCount != destinationTransform.childCount)
         {
             Debug.LogWarning("Invalid transform copy, they need to match transform hierarchies");

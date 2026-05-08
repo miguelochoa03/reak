@@ -129,6 +129,11 @@ public class ApplePickupAndThrow : NetworkBehaviour
         if (AppleCount.Value <= 0) { UpdateStatus("No apples"); return; }
 
         nextThrowTime = Time.time + throwCooldown;
+
+        // Play throw animation locally — NetworkAnimator (Owner authority) replicates to other clients
+        var animation = GetComponent<PlayerAnimation>();
+        if (animation != null) animation.PlayThrow();
+
         Vector3 origin = LookPoint.position + camTransform.forward * spawnDistance;
         Vector3 dir = camTransform.forward;
         RequestThrowRpc(origin, dir);

@@ -69,4 +69,18 @@ public class AppleSpawner : NetworkBehaviour
     }
 
     public void NotifyEaten(Apple eaten) { /* spawning is now Update-driven; no-op */ }
+
+    public override void OnNetworkDespawn()
+    {
+        // Clean up apples we spawned so NGO doesn't trip on stale references during scene shutdown.
+        if (!IsServer) return;
+        foreach (var no in _live)
+        {
+            if (no != null && no.IsSpawned)
+            {
+                try { no.Despawn(true); } catch { /* swallow shutdown-race exceptions */ }
+            }
+        }
+        _live.Clear();
+    }
 }

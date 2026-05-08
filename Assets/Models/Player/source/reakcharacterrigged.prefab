@@ -1844,7 +1844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   health: 100
-  dieMaterial: {fileID: 0}
+  dieMaterial: {fileID: 2100000, guid: 98a4d1dde5afa864d8fca80fbfc84fff, type: 2}
   body: {fileID: 0}
   tophead: {fileID: 0}
   bottomhead: {fileID: 0}

@@ -166,6 +166,12 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 0ad47225960c8734b80b063d875a902f, type: 3}
     - {fileID: 8300000, guid: 787a67d3393befe47a70ad0b75c03c48, type: 3}
     - {fileID: 8300000, guid: 0463d6baddf341b47ac92a6a899be5af, type: 3}
+  - name: bonecrush
+    audio:
+    - {fileID: 8300000, guid: 360912d3c4164fa48891a091897e40e5, type: 3}
+  - name: win
+    audio:
+    - {fileID: 8300000, guid: b2464fcaca2ec6e42a140cff25e59d1d, type: 3}
 --- !u!114 &5862318889311906339
 MonoBehaviour:
   m_ObjectHideFlags: 0

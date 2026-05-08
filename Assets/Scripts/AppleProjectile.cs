@@ -9,7 +9,9 @@ public class AppleProjectile : NetworkBehaviour
     public float stunDuration = 2f;
     public float lifetime = 6f;
     [Tooltip("Force applied to the hit player on impact, opposite to the apple's velocity (knockback feel).")]
-    public float knockbackForce = 8f;
+    public float knockbackForce = 40f;
+    [Tooltip("Name of the SoundEffectBunch on SoundEffectManager to play when a player is hit (e.g. \"bonecrush\"). Leave empty for no sound.")]
+    public string hitSoundName = "bonecrush";
 
     Rigidbody rb;
     bool consumed;
@@ -32,7 +34,7 @@ public class AppleProjectile : NetworkBehaviour
         if (stun != null)
         {
             stun.StunForRpc(stunDuration);
-            // Optional: knockback impulse (server-side; ClientNetworkTransform will sync it)
+            // Knockback impulse (server-side; ClientNetworkTransform will sync it)
             var hitRb = no.GetComponent<Rigidbody>();
             if (hitRb != null && rb != null)
             {
@@ -40,10 +42,19 @@ public class AppleProjectile : NetworkBehaviour
                 if (dir.sqrMagnitude < 0.01f) dir = transform.forward;
                 hitRb.AddForce(dir * knockbackForce, ForceMode.VelocityChange);
             }
+            // Hit sound for everyone
+            PlayHitSoundRpc();
         }
 
         consumed = true;
         SelfDespawn();
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    void PlayHitSoundRpc()
+    {
+        if (!string.IsNullOrEmpty(hitSoundName))
+            SoundManager.play(hitSoundName);
     }
 
     void SelfDespawn()

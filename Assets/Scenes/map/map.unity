@@ -695,11 +695,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8153814243533099148, guid: 9a33717a88b452c42b48f0a4173afe7c, type: 3}
       propertyPath: soundEffects.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8153814243533099148, guid: 9a33717a88b452c42b48f0a4173afe7c, type: 3}
       propertyPath: soundEffects.Array.data[5].name
-      value: Win
+      value: win
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153814243533099148, guid: 9a33717a88b452c42b48f0a4173afe7c, type: 3}
+      propertyPath: soundEffects.Array.data[6].name
+      value: bonecrush
       objectReference: {fileID: 0}
     - target: {fileID: 8153814243533099148, guid: 9a33717a88b452c42b48f0a4173afe7c, type: 3}
       propertyPath: soundEffects.Array.data[5].audio.Array.size
@@ -717,6 +721,10 @@ PrefabInstance:
       propertyPath: 'soundEffects.Array.data[5].audio.Array.data[2]'
       value: 
       objectReference: {fileID: 8300000, guid: e7c3914f967822c4aba1174c29d4c9bc, type: 3}
+    - target: {fileID: 8153814243533099148, guid: 9a33717a88b452c42b48f0a4173afe7c, type: 3}
+      propertyPath: 'soundEffects.Array.data[6].audio.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 360912d3c4164fa48891a091897e40e5, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

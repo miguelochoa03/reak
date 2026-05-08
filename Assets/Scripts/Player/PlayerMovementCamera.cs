@@ -247,6 +247,7 @@ public class PlayerMovementCamera : NetworkBehaviour
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
             canJump = false;
+            SoundManager.play("Jump");
         }
 
         // ignore vertical vector relative to camera (forward and backward movement)

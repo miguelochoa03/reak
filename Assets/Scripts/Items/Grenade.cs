@@ -1,22 +1,23 @@
 using Unity.Netcode;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Grenade : NetworkBehaviour
 {
     [Header("Explosion")]
-    [SerializeField] float fuseTime = 3f;
+    [SerializeField] float fuseTime = 5f;
     [SerializeField] float explosionRadius = 5f;
     [SerializeField] float explosionForce = 15f;
     [SerializeField] float damage = 25f;
 
     bool exploded = false;
 
+    public UnityEvent explosion;
+
     void Start()
     {
-        if (IsServer)
-        {
-            Invoke(nameof(Explode), fuseTime);
-        }
+        Invoke(nameof(Explode), fuseTime);
     }
 
     void Explode()
@@ -25,6 +26,10 @@ public class Grenade : NetworkBehaviour
 
         exploded = true;
 
+        Debug.Log("BOOOOOM");
+
+        explosion.Invoke();
+
         Collider[] hits = Physics.OverlapSphere(
             transform.position,
             explosionRadius
@@ -32,13 +37,13 @@ public class Grenade : NetworkBehaviour
 
         foreach (Collider hit in hits)
         {
-            // Damage
+            // DAMAGE
             if (hit.TryGetComponent<PlayerHealth>(out var health))
             {
                 health.TakeDamage(damage);
             }
 
-            // Push Physics
+            // PUSH
             if (hit.TryGetComponent<Rigidbody>(out var rb))
             {
                 rb.AddExplosionForce(
@@ -51,9 +56,9 @@ public class Grenade : NetworkBehaviour
             }
         }
 
-        Debug.Log("BOOOOOM");
+        //NetworkObject.Despawn();
 
-        NetworkObject.Despawn();
+        StartCoroutine(Disappear());
     }
 
     void OnDrawGizmosSelected()
@@ -64,5 +69,11 @@ public class Grenade : NetworkBehaviour
             transform.position,
             explosionRadius
         );
+    }
+
+    public IEnumerator Disappear()
+    {
+        yield return new WaitForSeconds(1);
+        Destroy(gameObject);
     }
 }

@@ -35,13 +35,12 @@ public class PlayerClimb : NetworkBehaviour
         bool climbray = Physics.Raycast(origin, direction, out RaycastHit climbhit, rayDistance);
         Debug.DrawRay(origin, direction * rayDistance, Color.red); // see visually in scene view (not game view)
 
-        // read where you're facing
+        // read where you're facing — null-guard everything in case PlayerInteraction is disabled or hit got destroyed
+        if (interaction == null) return;
         interactionray = interaction.ray;
         interactionhit = interaction.hit;
 
-        // Debug.Log("interactionhit point" + interactionhit.point);
-
-        if (interactionray)
+        if (interactionray && interactionhit.collider != null)
         {
             // check if climbable object
             bool IsClimbable = interactionhit.collider.TryGetComponent<Climbable>(out var climb);

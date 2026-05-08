@@ -21,6 +21,7 @@ public class PlayerHealth : NetworkBehaviour
     public void TakeDamage(float dmg)
     {
         health -= dmg;
+        SoundManager.play("Crack");
     }
     public override void OnNetworkSpawn()
     {
@@ -50,6 +51,7 @@ public class PlayerHealth : NetworkBehaviour
             GetComponent<PlayerMovementCamera>().enabled = false;
             rb.isKinematic = true;
             anim.PlayTuck();
+            SoundManager.play("Death");
 
             didDie = true;
         }

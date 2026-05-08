@@ -25,10 +25,8 @@ public class AppleProjectile : NetworkBehaviour
         if (!IsServer || consumed) return;
 
         var no = col.collider.GetComponentInParent<NetworkObject>();
-        if (no == null) { SelfDespawn(); return; }
-
-        // Don't ragdoll the thrower (avoid self-hits)
-        if (no.OwnerClientId == OwnerClientId) return;
+        if (no == null) return;          // hit ground/prop — let physics handle, don't despawn
+        if (no.OwnerClientId == OwnerClientId) return;  // don't hit self
 
         var stun = no.GetComponent<PlayerStun>();
         if (stun != null)
